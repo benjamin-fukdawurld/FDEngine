@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_QML_DEBUG
 CFLAGS        = -pipe -g -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++1z -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I. -I../include -I../../FDCore/include -I../../FD3D/include -I../../FDGL/include -I../../thirdparty/glad/include -I../../thirdparty/pybind11/include -I../../thirdparty/glm -I../../thirdparty/assimp/include -I../../thirdparty -I../../../../Qt/5.13.2/gcc_64/mkspecs/linux-g++
+INCPATH       = -I. -I../include -I../../FDCore/include -I../../FDSerialize/include -I../../FDJson/include -I../../FD3D/include -I../../FDGL/include -I../../thirdparty/rapidjson/include -I../../thirdparty/glad/include -I../../thirdparty/pybind11/include -I../../thirdparty/glm -I../../thirdparty/assimp/include -I../../thirdparty -isystem /usr/include/python3.7m -isystem /usr/include/x86_64-linux-gnu/python3.7m -I../../../../Qt/5.13.2/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/benjamin/Qt/5.13.2/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = FDEngine_test1.0.0
 DISTDIR = /home/benjamin/dev/FanatikDevelopment/build/obj/FDEngine_test/FDEngine_test1.0.0
 LINK          = g++
 LFLAGS        = 
-LIBS          = $(SUBLIBS) -L../../build/lib -lglad -lFDGL -lFD3D -lFDCore -lFDEngine -lglfw -lGL -lpthread -ldl -lX11 -lXrandr -lstdc++ -lpython3.7m -L../../thirdparty/assimp/bin -lassimp   
+LIBS          = $(SUBLIBS) -L../../build/lib -lglad -lFDGL -lFD3D -lFDSerialize -lFDJson -lFD3DJson -lFDCore -lFDEngine -lglfw -lGL -lpthread -ldl -lX11 -lXrandr -lstdc++ -lpython3.7m -L../../thirdparty/assimp/bin -lassimp   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -850,6 +850,21 @@ compiler_clean:
 		../../FDGL/include/FDGL/BaseRenderer.h \
 		../../thirdparty/glad/include/glad/glad.h \
 		../../thirdparty/glad/include/KHR/khrplatform.h \
+		../../FDCore/include/FDCore/ThreadPool.h \
+		../../thirdparty/pybind11/include/pybind11/embed.h \
+		../../thirdparty/pybind11/include/pybind11/pybind11.h \
+		../../thirdparty/pybind11/include/pybind11/attr.h \
+		../../thirdparty/pybind11/include/pybind11/cast.h \
+		../../thirdparty/pybind11/include/pybind11/pytypes.h \
+		../../thirdparty/pybind11/include/pybind11/detail/common.h \
+		../../thirdparty/pybind11/include/pybind11/buffer_info.h \
+		../../thirdparty/pybind11/include/pybind11/detail/typeid.h \
+		../../thirdparty/pybind11/include/pybind11/detail/descr.h \
+		../../thirdparty/pybind11/include/pybind11/detail/internals.h \
+		../../thirdparty/pybind11/include/pybind11/options.h \
+		../../thirdparty/pybind11/include/pybind11/detail/class.h \
+		../../thirdparty/pybind11/include/pybind11/detail/init.h \
+		../../thirdparty/pybind11/include/pybind11/eval.h \
 		../../FDGL/test/GLFWImpl.h \
 		../../FDGL/include/FDGL/BaseOpenGLWindow.h \
 		../../FDGL/test/GLUtils.h \
@@ -1097,6 +1112,21 @@ compiler_clean:
 		../../FDGL/include/FDGL/BaseRenderer.h \
 		../../thirdparty/glad/include/glad/glad.h \
 		../../thirdparty/glad/include/KHR/khrplatform.h \
+		../../FDCore/include/FDCore/ThreadPool.h \
+		../../thirdparty/pybind11/include/pybind11/embed.h \
+		../../thirdparty/pybind11/include/pybind11/pybind11.h \
+		../../thirdparty/pybind11/include/pybind11/attr.h \
+		../../thirdparty/pybind11/include/pybind11/cast.h \
+		../../thirdparty/pybind11/include/pybind11/pytypes.h \
+		../../thirdparty/pybind11/include/pybind11/detail/common.h \
+		../../thirdparty/pybind11/include/pybind11/buffer_info.h \
+		../../thirdparty/pybind11/include/pybind11/detail/typeid.h \
+		../../thirdparty/pybind11/include/pybind11/detail/descr.h \
+		../../thirdparty/pybind11/include/pybind11/detail/internals.h \
+		../../thirdparty/pybind11/include/pybind11/options.h \
+		../../thirdparty/pybind11/include/pybind11/detail/class.h \
+		../../thirdparty/pybind11/include/pybind11/detail/init.h \
+		../../thirdparty/pybind11/include/pybind11/eval.h \
 		../../FDGL/include/FDGL/BufferedMesh.h \
 		../../FD3D/include/FD3D/Mesh/AbstractMesh.h \
 		../../FD3D/include/FD3D/Utils/VertexProxy.h \
@@ -1213,7 +1243,61 @@ compiler_clean:
 		../../FD3D/include/FD3D/Material/Texture.h \
 		../../FD3D/include/FD3D/Mesh/Mesh.h \
 		../../FD3D/include/FD3D/Behavior/StrategyBehavior.h \
-		../../FD3D/include/FD3D/Behavior/Behavior.h
+		../../FD3D/include/FD3D/Behavior/Behavior.h \
+		../../FDJson/include/FDJson/Json_fwd.h \
+		../../FDJson/include/FDJson/Json_primitive_fwd.h \
+		../../thirdparty/rapidjson/include/rapidjson/fwd.h \
+		../../thirdparty/rapidjson/include/rapidjson/rapidjson.h \
+		../../thirdparty/rapidjson/include/rapidjson/msinttypes/stdint.h \
+		../../thirdparty/rapidjson/include/rapidjson/msinttypes/inttypes.h \
+		../../FDJson/include/FDJson/FDJson.h \
+		../../FDSerialize/include/FDSerialize/SerializerBase.h \
+		../../FDJson/include/FDJson/Json_array_fwd.h \
+		../../FDJson/include/FDJson/Json_list_fwd.h \
+		../../FDJson/include/FDJson/Json_tuple_fwd.h \
+		../../FDJson/include/FDJson/Json_set_fwd.h \
+		../../FDJson/include/FDJson/Json_map_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Json/FD3D_Json_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Json/Glm_Json_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Glm_Serialize_utils.h \
+		../../FD3D/include/FD3D/Serialization/Json/SceneNode_Json_fwd.h \
+		../../FDJson/include/FDJson/Json_utils.h \
+		../../FDJson/include/FDJson/Json_primitive.h \
+		../../FDJson/include/FDJson/JsonSerializer.h \
+		../../thirdparty/rapidjson/include/rapidjson/document.h \
+		../../thirdparty/rapidjson/include/rapidjson/reader.h \
+		../../thirdparty/rapidjson/include/rapidjson/allocators.h \
+		../../thirdparty/rapidjson/include/rapidjson/stream.h \
+		../../thirdparty/rapidjson/include/rapidjson/encodings.h \
+		../../thirdparty/rapidjson/include/rapidjson/encodedstream.h \
+		../../thirdparty/rapidjson/include/rapidjson/memorystream.h \
+		../../thirdparty/rapidjson/include/rapidjson/internal/clzll.h \
+		../../thirdparty/rapidjson/include/rapidjson/internal/meta.h \
+		../../thirdparty/rapidjson/include/rapidjson/internal/stack.h \
+		../../thirdparty/rapidjson/include/rapidjson/internal/swap.h \
+		../../thirdparty/rapidjson/include/rapidjson/internal/strtod.h \
+		../../thirdparty/rapidjson/include/rapidjson/internal/ieee754.h \
+		../../thirdparty/rapidjson/include/rapidjson/internal/biginteger.h \
+		../../thirdparty/rapidjson/include/rapidjson/internal/diyfp.h \
+		../../thirdparty/rapidjson/include/rapidjson/internal/pow10.h \
+		../../thirdparty/rapidjson/include/rapidjson/error/error.h \
+		../../thirdparty/rapidjson/include/rapidjson/internal/strfunc.h \
+		../../FDJson/include/FDJson/Json_array.h \
+		../../FDJson/include/FDJson/Json_list.h \
+		../../FDJson/include/FDJson/Json_tuple.h \
+		../../FDJson/include/FDJson/Json_set.h \
+		../../FDJson/include/FDJson/Json_map.h \
+		../../FD3D/include/FD3D/Serialization/Json/FD3D_Json_utils.h \
+		../../FD3D/include/FD3D/Serialization/Json/Glm_Json_utils.h \
+		../../FD3D/include/FD3D/Serialization/Json/Transform_Json.h \
+		../../FD3D/include/FD3D/Serialization/Json/VertexProxy_Json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Projection_Json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Component_Json.h \
+		../../FD3D/include/FD3D/Serialization/Json/SceneNode_Json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Camera_Json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Light_Json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Material_Json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Mesh_Json.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../../build/obj/FDEngine_test/Engine.o Engine.cpp
 
 ../../build/obj/FDEngine_test/GLFWImpl.o: GLFWImpl.cpp GLFWImpl.h \

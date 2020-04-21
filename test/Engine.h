@@ -6,6 +6,8 @@
 #include <FDCore/AssociativeContainer.h>
 #include <FDCore/ThreadPool.h>
 
+#include <pybind11/embed.h>
+
 class Engine : public FDEngine::BaseEngine
 {
     protected:
@@ -13,7 +15,9 @@ class Engine : public FDEngine::BaseEngine
         FDCore::ThreadPool m_threadPool;
 
     public:
-        using BaseEngine::BaseEngine;
+        Engine(FDGL::BaseOpenGLContext &ctx,
+               FDGL::BaseOpenGLWindow &window,
+               FDGL::BaseRenderer &renderer);
         ~Engine() override;
 
         FDCore::ThreadPool &getThreadPool();

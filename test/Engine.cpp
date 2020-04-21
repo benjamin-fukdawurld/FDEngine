@@ -11,6 +11,23 @@
 #include <FD3D/SceneGraph/SceneLoader.h>
 #include <FD3D/Behavior/StrategyBehavior.h>
 
+#include <FDJson/Json_fwd.h>
+#include <FD3D/Serialization/Json/FD3D_Json_fwd.h>
+
+#include <FDJson/Json_utils.h>
+#include <FD3D/Serialization/Json/FD3D_Json_utils.h>
+
+#include <FDJson/JsonSerializer.h>
+
+#include <pybind11/embed.h>
+
+
+Engine::Engine(FDGL::BaseOpenGLContext &ctx, FDGL::BaseOpenGLWindow &window, FDGL::BaseRenderer &renderer):
+    FDEngine::BaseEngine(ctx, window, renderer)
+{
+    pybind11::initialize_interpreter();
+}
+
 Engine::~Engine()
 {
     quit();
@@ -53,6 +70,7 @@ void Engine::quit()
     m_window.quit();
     m_window.destroy();
     m_ctx.quit();
+    pybind11::finalize_interpreter();
 }
 
 void Engine::processInput(FDGL::BaseOpenGLWindow &)
@@ -151,13 +169,22 @@ void Engine::initScene()
         m_scene.addNode(light.release());
     }
 
+    pybind11::dict locals;
+    pybind11::exec(R"(
+        def getAngle(t):
+            return (0, t / 10000.0, 0)
+    )", pybind11::globals(), locals);
+    pybind11::function getAngle = pybind11::reinterpret_borrow<pybind11::function>(locals["getAngle"]);
+
     static_cast<Renderer&>(m_renderer).setLight(&lights.front()->getEntity());
 
     std::vector<FDGL::BufferedMesh*> meshes = m_scene.getComponentsAs<FDGL::BufferedMesh>();
-    std::function<void(FD3D::StrategyBehavior*)> updateFunc = [this](FD3D::StrategyBehavior *bvr){
-        bvr->getNode()->as<FD3D::ObjectNode>()->getEntity().setRotation(glm::vec3(0, m_timeMgr.getElapsedTime() / 10000.0f, 0));
+    std::function<void(FD3D::StrategyBehavior*)> updateFunc = [this, getAngle](FD3D::StrategyBehavior *bvr){
+        pybind11::tuple t = getAngle(m_timeMgr.getElapsedTime());
+        bvr->getNode()->as<FD3D::ObjectNode>()->getEntity().setRotation(glm::vec3(t[0].cast<float>(), t[1].cast<float>(), t[2].cast<float>()));
     };
 
+    FDJson::Serializer serializer;
     for(auto *m: meshes)
     {
         m->setVAOFunctionToDefault();
