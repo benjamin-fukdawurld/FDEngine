@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_QML_DEBUG
 CFLAGS        = -pipe -g -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++1z -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I. -I../include -I../../FDCore/include -I../../FDSerialize/include -I../../FDJson/include -I../../FD3D/include -I../../FDGL/include -I../../thirdparty/rapidjson/include -I../../thirdparty/glad/include -I../../thirdparty/pybind11/include -I../../thirdparty/glm -I../../thirdparty/assimp/include -I../../thirdparty -isystem /usr/include/python3.7m -isystem /usr/include/x86_64-linux-gnu/python3.7m -I../../../../Qt/5.13.2/gcc_64/mkspecs/linux-g++
+INCPATH       = -I. -I../include -I../../FDCore/include -I../../FDSerialize/include -I../../FDJson/include -I../../FD3D/include -I../../FDGL/include -I../../FDScript/include -I../../FDPython/include -I../../thirdparty/rapidjson/include -I../../thirdparty/glad/include -I../../thirdparty/pybind11/include -I../../thirdparty/glm -I../../thirdparty/assimp/include -I../../thirdparty -isystem /usr/include/python3.7m -isystem /usr/include/x86_64-linux-gnu/python3.7m -isystem /usr/include/libdrm -I../../../../Qt/5.13.2/gcc_64/mkspecs/linux-g++
 QMAKE         = /home/benjamin/Qt/5.13.2/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -40,7 +40,7 @@ DISTNAME      = FDEngine_test1.0.0
 DISTDIR = /home/benjamin/dev/FanatikDevelopment/build/obj/FDEngine_test/FDEngine_test1.0.0
 LINK          = g++
 LFLAGS        = 
-LIBS          = $(SUBLIBS) -L../../build/lib -lglad -lFDGL -lFD3D -lFDSerialize -lFDJson -lFD3DJson -lFDCore -lFDEngine -lglfw -lGL -lpthread -ldl -lX11 -lXrandr -lstdc++ -lpython3.7m -L../../thirdparty/assimp/bin -lassimp   
+LIBS          = $(SUBLIBS) -L../../build/lib -L../../thirdparty/assimp/bin -lFDCore -lFDGL -lFD3D -lFDSerialize -lFDJson -lFD3DJson -lFDScript -lFDPython -lFD3DPython -lFDCorePython -lFDEngine -lglad -lpthread -ldl -lstdc++ -lassimp -lpython3.7m -lglfw -lGL -lXrandr -lX11   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -62,7 +62,8 @@ OBJECTS       = ../../build/obj/FDEngine_test/main.o \
 		../../build/obj/FDEngine_test/GLFWImpl.o \
 		../../build/obj/FDEngine_test/GLUtils.o \
 		../../build/obj/FDEngine_test/Renderer.o
-DIST          = ../../../../Qt/5.13.2/gcc_64/mkspecs/features/spec_pre.prf \
+DIST          = Scripts/PythonBehavior.py \
+		../../../../Qt/5.13.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/common/unix.conf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/common/linux.conf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/common/sanitize.conf \
@@ -244,6 +245,7 @@ DIST          = ../../../../Qt/5.13.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/features/default_pre.prf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/features/resolve_config.prf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/features/default_post.prf \
+		../../../../Qt/5.13.2/gcc_64/mkspecs/features/link_pkgconfig.prf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/features/qml_debug.prf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/features/warn_on.prf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/features/qmake_use.prf \
@@ -454,6 +456,7 @@ Makefile.FDEngine_test: FDEngine_test.pro ../../../../Qt/5.13.2/gcc_64/mkspecs/l
 		../../../../Qt/5.13.2/gcc_64/mkspecs/features/default_pre.prf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/features/resolve_config.prf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/features/default_post.prf \
+		../../../../Qt/5.13.2/gcc_64/mkspecs/features/link_pkgconfig.prf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/features/qml_debug.prf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/features/warn_on.prf \
 		../../../../Qt/5.13.2/gcc_64/mkspecs/features/qmake_use.prf \
@@ -646,6 +649,7 @@ Makefile.FDEngine_test: FDEngine_test.pro ../../../../Qt/5.13.2/gcc_64/mkspecs/l
 ../../../../Qt/5.13.2/gcc_64/mkspecs/features/default_pre.prf:
 ../../../../Qt/5.13.2/gcc_64/mkspecs/features/resolve_config.prf:
 ../../../../Qt/5.13.2/gcc_64/mkspecs/features/default_post.prf:
+../../../../Qt/5.13.2/gcc_64/mkspecs/features/link_pkgconfig.prf:
 ../../../../Qt/5.13.2/gcc_64/mkspecs/features/qml_debug.prf:
 ../../../../Qt/5.13.2/gcc_64/mkspecs/features/warn_on.prf:
 ../../../../Qt/5.13.2/gcc_64/mkspecs/features/qmake_use.prf:
@@ -683,6 +687,11 @@ distclean: clean
 
 ####### Sub-libraries
 
+first: $(first) copyscripts
+
+copyscripts:
+	$(COPY) /home/benjamin/dev/FanatikDevelopment/FDEngine/test/Scripts/* ../../build/bin
+
 check: first
 
 benchmark: first
@@ -700,6 +709,7 @@ compiler_clean:
 ../../build/obj/FDEngine_test/main.o: main.cpp Engine.h \
 		../include/FDEngine/BaseEngine.h \
 		../../FDCore/include/FDCore/TimeManager.h \
+		../../FDCore/include/FDCore/Macros.h \
 		../../FD3D/include/FD3D/SceneGraph/Scene.h \
 		../../FD3D/include/FD3D/SceneGraph/SceneNode.h \
 		../../FDCore/include/FDCore/Identifiable.h \
@@ -851,6 +861,10 @@ compiler_clean:
 		../../thirdparty/glad/include/glad/glad.h \
 		../../thirdparty/glad/include/KHR/khrplatform.h \
 		../../FDCore/include/FDCore/ThreadPool.h \
+		../../FDPython/include/FDPython/Interpreter.h \
+		../../FDScript/include/FDScript/BaseInterpreter.h \
+		../../FDScript/include/FDScript/BaseValue.h \
+		../../FDPython/include/FDPython/Value.h \
 		../../thirdparty/pybind11/include/pybind11/embed.h \
 		../../thirdparty/pybind11/include/pybind11/pybind11.h \
 		../../thirdparty/pybind11/include/pybind11/attr.h \
@@ -962,6 +976,7 @@ compiler_clean:
 ../../build/obj/FDEngine_test/Engine.o: Engine.cpp Engine.h \
 		../include/FDEngine/BaseEngine.h \
 		../../FDCore/include/FDCore/TimeManager.h \
+		../../FDCore/include/FDCore/Macros.h \
 		../../FD3D/include/FD3D/SceneGraph/Scene.h \
 		../../FD3D/include/FD3D/SceneGraph/SceneNode.h \
 		../../FDCore/include/FDCore/Identifiable.h \
@@ -1113,6 +1128,10 @@ compiler_clean:
 		../../thirdparty/glad/include/glad/glad.h \
 		../../thirdparty/glad/include/KHR/khrplatform.h \
 		../../FDCore/include/FDCore/ThreadPool.h \
+		../../FDPython/include/FDPython/Interpreter.h \
+		../../FDScript/include/FDScript/BaseInterpreter.h \
+		../../FDScript/include/FDScript/BaseValue.h \
+		../../FDPython/include/FDPython/Value.h \
 		../../thirdparty/pybind11/include/pybind11/embed.h \
 		../../thirdparty/pybind11/include/pybind11/pybind11.h \
 		../../thirdparty/pybind11/include/pybind11/attr.h \
@@ -1297,13 +1316,32 @@ compiler_clean:
 		../../FD3D/include/FD3D/Serialization/Json/Camera_Json.h \
 		../../FD3D/include/FD3D/Serialization/Json/Light_Json.h \
 		../../FD3D/include/FD3D/Serialization/Json/Material_Json.h \
-		../../FD3D/include/FD3D/Serialization/Json/Mesh_Json.h
+		../../FD3D/include/FD3D/Serialization/Json/Mesh_Json.h \
+		../../thirdparty/pybind11/include/pybind11/operators.h \
+		../../thirdparty/pybind11/include/pybind11/stl.h \
+		../../FDCore/include/FDCore/Binding/Python/FDCorePython.h \
+		../../FDCore/include/FDCore/Binding/Python/ThreadPool_python.h \
+		../../FDCore/include/FDCore/Binding/Python/TimeManager_python.h \
+		../../FD3D/include/FD3D/Binding/Python/FD3DPython.h \
+		../../FD3D/include/FD3D/Binding/Python/Glm_vec_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Projection_python.h \
+		../../FD3D/include/FD3D/Binding/Python/VertexProxy_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Component_python.h \
+		../../FD3D/include/FD3D/Binding/Python/SceneNode_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Transform_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Behavior_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Scene_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Camera_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Light_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Material_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Mesh_python.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../../build/obj/FDEngine_test/Engine.o Engine.cpp
 
 ../../build/obj/FDEngine_test/GLFWImpl.o: GLFWImpl.cpp GLFWImpl.h \
 		../../FDGL/include/FDGL/BaseOpenGLContext.h \
 		../../FDCore/include/FDCore/AssociativeContainer.h \
 		../../FDCore/include/FDCore/ComparableTrait.h \
+		../../FDCore/include/FDCore/Macros.h \
 		../../FDGL/include/FDGL/OpenGLResource.h \
 		../../FDGL/include/FDGL/OpenGLUtilsForward.h \
 		../../thirdparty/glm/glm/matrix.hpp \
@@ -1670,6 +1708,7 @@ compiler_clean:
 
 ../../build/obj/FDEngine_test/Renderer.o: Renderer.cpp Renderer.h \
 		../../FDCore/include/FDCore/TimeManager.h \
+		../../FDCore/include/FDCore/Macros.h \
 		../../FDGL/include/FDGL/BaseOpenGLContext.h \
 		../../FDCore/include/FDCore/AssociativeContainer.h \
 		../../FDCore/include/FDCore/ComparableTrait.h \

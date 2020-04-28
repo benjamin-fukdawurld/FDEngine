@@ -20,12 +20,50 @@
 #include <FDJson/JsonSerializer.h>
 
 #include <pybind11/embed.h>
+#include <pybind11/operators.h>
+#include <pybind11/stl.h>
+
+#include <FDCore/Binding/Python/FDCorePython.h>
+#include <FD3D/Binding/Python/FD3DPython.h>
+
+#include <FDPython/Value.h>
+
+namespace py = pybind11;
+
+//void rotate(FD3D::Behavior *bvr, FDCore::TimeManager<> &t)
+//{
+//    FD3D::ObjectNode *node = bvr->getNode().getNode().as<FD3D::ObjectNode>();
+//    FD3D::Transform &tran = node->getEntity();
+//    tran.setRotation(glm::vec3(0.0f, t.getElapsedTime() / -2000.0f, 0.0f));
+//}
+
+//PYBIND11_EMBEDDED_MODULE(test_module, m)
+//{
+//    m.def("rotate", &rotate);
+//}
+
+
+constexpr const char *py_script = R"(
+import PyFD3D
+import PyFDCore
+
+def rotate(bvr, t):
+    node = bvr.node.object
+    node.entity.eulerAngles = PyFD3D.vec.vec3(0.0, t.elapsedTime / -2000.0, 0.0)
+
+
+class TestClass:
+    def __init__(self):
+        self.message = "the message"
+
+    def the_method(self):
+        return "the method";
+)";
 
 
 Engine::Engine(FDGL::BaseOpenGLContext &ctx, FDGL::BaseOpenGLWindow &window, FDGL::BaseRenderer &renderer):
     FDEngine::BaseEngine(ctx, window, renderer)
 {
-    pybind11::initialize_interpreter();
 }
 
 Engine::~Engine()
@@ -45,6 +83,7 @@ const FDCore::ThreadPool &Engine::getThreadPool() const
 
 bool Engine::init(int, char **)
 {
+
     if(!m_ctx.init())
         return false;
 
@@ -60,6 +99,15 @@ bool Engine::init(int, char **)
     m_window.setInputStrategy(&Engine::processInput, this);
     m_window.init();
 
+//    m_pyInterpreter.importModule("test_module");
+    m_pyInterpreter.importModule("PyFD3D");
+    m_pyInterpreter.importModule("PyFDCore");
+    m_pyInterpreter.importModule("PythonBehavior");
+
+//    py::dict d;
+//    m_pyInterpreter.setVariable("locals", FDPython::Value(d));
+//    m_pyInterpreter.exec(py_script, *m_pyInterpreter.getVariable("locals"));
+
     initScene();
 
     return true;
@@ -70,7 +118,6 @@ void Engine::quit()
     m_window.quit();
     m_window.destroy();
     m_ctx.quit();
-    pybind11::finalize_interpreter();
 }
 
 void Engine::processInput(FDGL::BaseOpenGLWindow &)
@@ -84,6 +131,7 @@ void Engine::processInput(FDGL::BaseOpenGLWindow &)
 
 void Engine::update()
 {
+    pybind11::gil_scoped_release rel;
     std::vector<std::future<void>> taskResults;
     taskResults.reserve(m_behaviors.size());
     for(auto it = m_behaviors.begin(), end = m_behaviors.end(); it != end; ++it)
@@ -91,6 +139,8 @@ void Engine::update()
 
     for(auto &result: taskResults)
         result.wait();
+
+    pybind11::gil_scoped_acquire acq;
 }
 
 int Engine::run()
@@ -169,32 +219,37 @@ void Engine::initScene()
         m_scene.addNode(light.release());
     }
 
-    pybind11::dict locals;
-    pybind11::exec(R"(
-        def getAngle(t):
-            return (0, t / 10000.0, 0)
-    )", pybind11::globals(), locals);
-    pybind11::function getAngle = pybind11::reinterpret_borrow<pybind11::function>(locals["getAngle"]);
+    /*m_pyInterpreter.setVariable("test_module.rotate",
+                                FDPython::Value(m_pyInterpreter.getVariable("test_module")->getObject<pybind11::module>().attr("rotate")));*/
+    //m_pyInterpreter.setVariable("rotate", FDPython::Value(m_pyInterpreter.getVariable("locals")->getObject<pybind11::dict>()["rotate"]));
 
     static_cast<Renderer&>(m_renderer).setLight(&lights.front()->getEntity());
 
     std::vector<FDGL::BufferedMesh*> meshes = m_scene.getComponentsAs<FDGL::BufferedMesh>();
-    std::function<void(FD3D::StrategyBehavior*)> updateFunc = [this, getAngle](FD3D::StrategyBehavior *bvr){
-        pybind11::tuple t = getAngle(m_timeMgr.getElapsedTime());
-        bvr->getNode()->as<FD3D::ObjectNode>()->getEntity().setRotation(glm::vec3(t[0].cast<float>(), t[1].cast<float>(), t[2].cast<float>()));
-    };
+    /*std::function<void(FD3D::StrategyBehavior*)> updateFunc = [this](FD3D::StrategyBehavior *bvr){
+        pybind11::gil_scoped_acquire acquire;
+        this->m_pyInterpreter.getVariable("rotate")->getObject<pybind11::function>()(
+            static_cast<FD3D::Behavior*>(bvr), m_timeMgr
+        );
+    };*/
 
-    FDJson::Serializer serializer;
     for(auto *m: meshes)
     {
         m->setVAOFunctionToDefault();
         auto v = m_scene.getBoundNodes(m->getId());
         for(auto &n: v)
         {
-            std::unique_ptr<FD3D::StrategyBehavior> b(new FD3D::StrategyBehavior());
-            b->setUpdateStrategy(updateFunc);
-            b->setScene(&m_scene);
-            b->setNodeId(n->getId());
+            auto f = py::globals()["PythonBehavior"].attr("PythonBehavior");
+            py::print(f);
+            py::object obj = f(&m_timeMgr, &m_scene, n->getId());
+            py::print(obj);
+
+            std::unique_ptr<FD3D::PythonBehaviorWrapper> b(new FD3D::PythonBehaviorWrapper(obj));
+
+            //std::unique_ptr<FD3D::StrategyBehavior> b(new FD3D::StrategyBehavior());
+            //b->setUpdateStrategy(updateFunc);
+//            b->setScene(&m_scene);
+//            b->setNodeId(n->getId());
             m_scene.addComponent(b.get());
             m_scene.bindComponent(n->getId(), b->getId());
 
@@ -202,6 +257,7 @@ void Engine::initScene()
                 m_behaviors.insert(n->getId(), {});
 
             m_behaviors[n->getId()]->push_back(b->getId());
+            //b->update();
             b.release();
         }
     }

@@ -6,12 +6,13 @@
 #include <FDCore/AssociativeContainer.h>
 #include <FDCore/ThreadPool.h>
 
-#include <pybind11/embed.h>
+#include <FDPython/Interpreter.h>
 
 class Engine : public FDEngine::BaseEngine
 {
     protected:
         FDCore::AssociativeContainer<FD3D::SceneNode::id_type, std::vector<FD3D::Component::id_type>> m_behaviors;
+        FDPython::Interpreter m_pyInterpreter;
         FDCore::ThreadPool m_threadPool;
 
     public:

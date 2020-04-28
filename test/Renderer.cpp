@@ -209,7 +209,6 @@ void Renderer::renderNode(FD3D::SceneNodeProxy node)
 
     for(size_t i = 0, imax = meshes.size(); i < imax; ++i)
     {
-        //node->as<FD3D::ObjectNode>()->getEntity().setRotation(glm::vec3(0, m_timeMgr.getElapsedTime() / 10000.0f, 0));
         renderMesh(meshes[i]);
     }
 }

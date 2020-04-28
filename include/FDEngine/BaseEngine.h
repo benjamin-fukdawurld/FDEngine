@@ -10,7 +10,7 @@
 
 namespace FDEngine
 {
-    class BaseEngine
+    class FD_EXPORT BaseEngine
     {
         protected:
             FDGL::BaseOpenGLContext &m_ctx;

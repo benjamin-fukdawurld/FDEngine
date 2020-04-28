@@ -4,14 +4,29 @@ TEMPLATE = app
 CONFIG += console c++17
 CONFIG -= app_bundle
 CONFIG -= qt
+CONFIG += link_pkgconfig
+PKGCONFIG += python3 glfw3 gl xrandr x11
 
 DESTDIR = ../../build/bin
 MAKEFILE = ../../build/makefiles/$${TARGET}
 OBJECTS_DIR = ../../build/obj/$${TARGET}
 
-LIBS += -L../../build/lib -lglad -lFDGL -lFD3D -lFDSerialize -lFDJson -lFD3DJson -lFDCore -lFDEngine
-LIBS += -lglfw -lGL -lpthread -ldl -lX11 -lXrandr -lstdc++ -lpython3.7m
-LIBS += -L../../thirdparty/assimp/bin -lassimp
+LIBS += -L../../build/lib
+LIBS += -L../../thirdparty/assimp/bin
+
+LIBS += -lFDCore -lFDGL -lFD3D
+LIBS += -lFDSerialize -lFDJson -lFD3DJson
+LIBS += -lFDScript -lFDPython -lFD3DPython -lFDCorePython
+LIBS += -lFDEngine
+LIBS += -lglad -lpthread -ldl -lstdc++ -lassimp
+
+copyscripts.commands = $(COPY) $$PWD/Scripts/* $$DESTDIR
+first.depends = $(first) copyscripts
+
+export(first.depends)
+export(copyscripts)
+
+QMAKE_EXTRA_TARGETS += first copyscripts
 
 INCLUDEPATH += \
     ../include \
@@ -20,14 +35,14 @@ INCLUDEPATH += \
     ../../FDJson/include \
     ../../FD3D/include \
     ../../FDGL/include \
+    ../../FDScript/include \
+    ../../FDPython/include \
     ../../thirdparty/rapidjson/include \
     ../../thirdparty/glad/include \
     ../../thirdparty/pybind11/include \
     ../../thirdparty/glm \
     ../../thirdparty/assimp/include \
     ../../thirdparty/ \
-    /usr/include/python3.7m \
-    /usr/include/x86_64-linux-gnu/python3.7m \
 
 SOURCES += \
     main.cpp \
@@ -45,3 +60,4 @@ HEADERS += \
 OTHER_FILES += \
 
 DISTFILES += \
+    Scripts/PythonBehavior.py
