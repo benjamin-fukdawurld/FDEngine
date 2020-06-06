@@ -28,7 +28,7 @@ std::string loadFile(const std::string &filePath)
     return result;
 }
 
-FDGL::OpenGLTextureWrapper loadTexture(const std::string &filePath)
+FDGL::OpenGLTextureObjectWrapper loadTexture(const std::string &filePath)
 {
     size_t size[2];
     int width, height, nrChannels;
@@ -41,12 +41,12 @@ FDGL::OpenGLTextureWrapper loadTexture(const std::string &filePath)
     if (!data)
     {
         std::cout << "Failed to load texture" << std::endl;
-        return FDGL::OpenGLTextureWrapper();
+        return FDGL::OpenGLTextureObjectWrapper();
     }
 
-    FDGL::OpenGLTextureWrapper tex;
+    FDGL::OpenGLTextureObjectWrapper tex;
     if(!tex.create())
-        return FDGL::OpenGLTextureWrapper();
+        return FDGL::OpenGLTextureObjectWrapper();
 
     tex.bind(FDGL::TextureTarget::Texture2D);
 
@@ -87,11 +87,11 @@ FDGL::OpenGLTextureWrapper loadTexture(const std::string &filePath)
     return tex;
 }
 
-FDGL::OpenGLTextureWrapper loadTexture(const aiTexture *input)
+FDGL::OpenGLTextureObjectWrapper loadTexture(const aiTexture *input)
 {
-    FDGL::OpenGLTextureWrapper tex;
+    FDGL::OpenGLTextureObjectWrapper tex;
     if(!tex.create())
-        return FDGL::OpenGLTextureWrapper();
+        return FDGL::OpenGLTextureObjectWrapper();
 
     size_t size[2];
     size[0] = static_cast<size_t>(input->mWidth);
@@ -113,7 +113,7 @@ FDGL::OpenGLTextureWrapper loadTexture(const aiTexture *input)
     else
     {
         std::cerr << "unsupported texture format '" << formatStr << "'" << std::endl;
-        return FDGL::OpenGLTextureWrapper();
+        return FDGL::OpenGLTextureObjectWrapper();
     }
 
     tex.bind(FDGL::TextureTarget::Texture2D);

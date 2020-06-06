@@ -11,7 +11,7 @@ CONFIG -= qt
 
 DESTDIR = ../build/lib
 MAKEFILE = ../build/makefiles/$${TARGET}
-OBJECTS_DIR = ../build/.obj/$${TARGET}
+OBJECTS_DIR = ../build/obj/$${TARGET}
 
 LIBS += -L../build/lib -L../thirdparty/assimp/bin
 LIBS += -lglad -lFDGL -lFD3D -lFDCore -lassimp

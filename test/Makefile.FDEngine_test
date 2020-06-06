@@ -40,7 +40,7 @@ DISTNAME      = FDEngine_test1.0.0
 DISTDIR = /home/benjamin/dev/FanatikDevelopment/build/obj/FDEngine_test/FDEngine_test1.0.0
 LINK          = g++
 LFLAGS        = 
-LIBS          = $(SUBLIBS) -L../../build/lib -L../../thirdparty/assimp/bin -lFDCore -lFDGL -lFD3D -lFDSerialize -lFDJson -lFD3DJson -lFDScript -lFDPython -lFD3DPython -lFDCorePython -lFDEngine -lglad -lpthread -ldl -lstdc++ -lassimp -lpython3.7m -lglfw -lGL -lXrandr -lX11   
+LIBS          = $(SUBLIBS) -L../../build/lib -L../../thirdparty/assimp/bin -lFDCore -lFDGL -lFD3D -lFDSerialize -lFDJson -lFD3DJson -lFDScript -lFDPython -lFDCorePython -lFD3DPython -lFDEngine -lglad -lpthread -ldl -lstdc++ -lassimp -lpython3.7m -lglfw -lGL -lXrandr -lX11   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -710,43 +710,65 @@ compiler_clean:
 		../include/FDEngine/BaseEngine.h \
 		../../FDCore/include/FDCore/TimeManager.h \
 		../../FDCore/include/FDCore/Macros.h \
+		../../FDCore/include/FDCore/ResourceManager.h \
+		../../FDCore/include/FDCore/AbstractResource.h \
+		../../FDCore/include/FDCore/Object.h \
+		../../FDCore/include/FDCore/TypeInformation.h \
+		../../FDCore/include/FDCore/ComparableTrait.h \
+		../../FD3D/include/FD3D/SceneGraph/SceneManager.h \
 		../../FD3D/include/FD3D/SceneGraph/Scene.h \
 		../../FD3D/include/FD3D/SceneGraph/SceneNode.h \
+		../../FD3D/include/FD3D/SceneGraph/Element.h \
 		../../FDCore/include/FDCore/Identifiable.h \
-		../../FDCore/include/FDCore/ComparableTrait.h \
-		../../FDCore/include/FDCore/TypeInformation.h \
 		../../FD3D/include/FD3D/SceneGraph/Component.h \
 		../../FDCore/include/FDCore/AssociativeContainer.h \
-		../../FDGL/include/FDGL/BaseOpenGLContext.h \
-		../../FDGL/include/FDGL/OpenGLResource.h \
-		../../FDGL/include/FDGL/OpenGLUtilsForward.h \
-		../../thirdparty/glm/glm/matrix.hpp \
+		../../FD3D/include/FD3D/SceneGraph/SceneNodeProxy.h \
+		../../thirdparty/assimp/include/assimp/scene.h \
+		../../thirdparty/assimp/include/assimp/types.h \
+		../../thirdparty/assimp/include/assimp/defs.h \
+		../../thirdparty/assimp/include/assimp/config.h \
+		../../thirdparty/assimp/include/assimp/vector2.h \
+		../../thirdparty/assimp/include/assimp/vector3.h \
+		../../thirdparty/assimp/include/assimp/color4.h \
+		../../thirdparty/assimp/include/assimp/matrix3x3.h \
+		../../thirdparty/assimp/include/assimp/matrix4x4.h \
+		../../thirdparty/assimp/include/assimp/quaternion.h \
+		../../thirdparty/assimp/include/assimp/vector2.inl \
+		../../thirdparty/assimp/include/assimp/vector3.inl \
+		../../thirdparty/assimp/include/assimp/color4.inl \
+		../../thirdparty/assimp/include/assimp/matrix3x3.inl \
+		../../thirdparty/assimp/include/assimp/matrix4x4.inl \
+		../../thirdparty/assimp/include/assimp/MathFunctions.h \
+		../../thirdparty/assimp/include/assimp/quaternion.inl \
+		../../thirdparty/assimp/include/assimp/texture.h \
+		../../thirdparty/assimp/include/assimp/Compiler/pushpack1.h \
+		../../thirdparty/assimp/include/assimp/Compiler/poppack1.h \
+		../../thirdparty/assimp/include/assimp/mesh.h \
+		../../thirdparty/assimp/include/assimp/aabb.h \
+		../../thirdparty/assimp/include/assimp/light.h \
+		../../thirdparty/assimp/include/assimp/camera.h \
+		../../thirdparty/assimp/include/assimp/material.h \
+		../../thirdparty/assimp/include/assimp/material.inl \
+		../../thirdparty/assimp/include/assimp/anim.h \
+		../../thirdparty/assimp/include/assimp/metadata.h \
+		../../thirdparty/assimp/include/assimp/Compiler/pstdint.h \
+		../../thirdparty/assimp/include/assimp/postprocess.h \
+		../../FD3D/include/FD3D/Mesh/Mesh.h \
+		../../FD3D/include/FD3D/Mesh/AbstractMesh.h \
+		../../FDCore/include/FDCore/EnumFlag.h \
+		../../FDCore/include/FDCore/BaseResource.h \
+		../../FD3D/include/FD3D/Material/Material.h \
+		../../thirdparty/glm/glm/vec3.hpp \
+		../../thirdparty/glm/glm/ext/vector_bool3.hpp \
+		../../thirdparty/glm/glm/detail/type_vec3.hpp \
 		../../thirdparty/glm/glm/detail/qualifier.hpp \
 		../../thirdparty/glm/glm/detail/setup.hpp \
 		../../thirdparty/glm/glm/simd/platform.h \
 		../../thirdparty/glm/glm/simd/neon.h \
-		../../thirdparty/glm/glm/vec2.hpp \
-		../../thirdparty/glm/glm/ext/vector_bool2.hpp \
-		../../thirdparty/glm/glm/detail/type_vec2.hpp \
 		../../thirdparty/glm/glm/detail/_swizzle.hpp \
 		../../thirdparty/glm/glm/detail/_swizzle_func.hpp \
-		../../thirdparty/glm/glm/detail/type_vec2.inl \
-		../../thirdparty/glm/glm/detail/compute_vector_relational.hpp \
-		../../thirdparty/glm/glm/ext/vector_bool2_precision.hpp \
-		../../thirdparty/glm/glm/ext/vector_float2.hpp \
-		../../thirdparty/glm/glm/ext/vector_float2_precision.hpp \
-		../../thirdparty/glm/glm/ext/vector_double2.hpp \
-		../../thirdparty/glm/glm/ext/vector_double2_precision.hpp \
-		../../thirdparty/glm/glm/ext/vector_int2.hpp \
-		../../thirdparty/glm/glm/ext/vector_int2_sized.hpp \
-		../../thirdparty/glm/glm/ext/scalar_int_sized.hpp \
-		../../thirdparty/glm/glm/ext/vector_uint2.hpp \
-		../../thirdparty/glm/glm/ext/vector_uint2_sized.hpp \
-		../../thirdparty/glm/glm/ext/scalar_uint_sized.hpp \
-		../../thirdparty/glm/glm/vec3.hpp \
-		../../thirdparty/glm/glm/ext/vector_bool3.hpp \
-		../../thirdparty/glm/glm/detail/type_vec3.hpp \
 		../../thirdparty/glm/glm/detail/type_vec3.inl \
+		../../thirdparty/glm/glm/detail/compute_vector_relational.hpp \
 		../../thirdparty/glm/glm/ext/vector_bool3_precision.hpp \
 		../../thirdparty/glm/glm/ext/vector_float3.hpp \
 		../../thirdparty/glm/glm/ext/vector_float3_precision.hpp \
@@ -754,8 +776,13 @@ compiler_clean:
 		../../thirdparty/glm/glm/ext/vector_double3_precision.hpp \
 		../../thirdparty/glm/glm/ext/vector_int3.hpp \
 		../../thirdparty/glm/glm/ext/vector_int3_sized.hpp \
+		../../thirdparty/glm/glm/ext/scalar_int_sized.hpp \
 		../../thirdparty/glm/glm/ext/vector_uint3.hpp \
 		../../thirdparty/glm/glm/ext/vector_uint3_sized.hpp \
+		../../thirdparty/glm/glm/ext/scalar_uint_sized.hpp \
+		../../FD3D/include/FD3D/Material/AbstractTexture.h \
+		../../FD3D/include/FD3D/Utils/VertexProxy.h \
+		../../FDCore/include/FDCore/CRTPTrait.h \
 		../../thirdparty/glm/glm/vec4.hpp \
 		../../thirdparty/glm/glm/ext/vector_bool4.hpp \
 		../../thirdparty/glm/glm/detail/type_vec4.hpp \
@@ -770,6 +797,26 @@ compiler_clean:
 		../../thirdparty/glm/glm/ext/vector_int4_sized.hpp \
 		../../thirdparty/glm/glm/ext/vector_uint4.hpp \
 		../../thirdparty/glm/glm/ext/vector_uint4_sized.hpp \
+		../../thirdparty/glm/glm/vec2.hpp \
+		../../thirdparty/glm/glm/ext/vector_bool2.hpp \
+		../../thirdparty/glm/glm/detail/type_vec2.hpp \
+		../../thirdparty/glm/glm/detail/type_vec2.inl \
+		../../thirdparty/glm/glm/ext/vector_bool2_precision.hpp \
+		../../thirdparty/glm/glm/ext/vector_float2.hpp \
+		../../thirdparty/glm/glm/ext/vector_float2_precision.hpp \
+		../../thirdparty/glm/glm/ext/vector_double2.hpp \
+		../../thirdparty/glm/glm/ext/vector_double2_precision.hpp \
+		../../thirdparty/glm/glm/ext/vector_int2.hpp \
+		../../thirdparty/glm/glm/ext/vector_int2_sized.hpp \
+		../../thirdparty/glm/glm/ext/vector_uint2.hpp \
+		../../thirdparty/glm/glm/ext/vector_uint2_sized.hpp \
+		../../FD3D/include/FD3D/Utils/IndexProxy.h \
+		../../FDGL/include/FDGL/BaseOpenGLContext.h \
+		../../FDGL/include/FDGL/OpenGLResource.h \
+		../../FDGL/include/FDGL/OpenGLObject.h \
+		../../FDGL/include/FDGL/OpenGLObjectWrapper.h \
+		../../FDGL/include/FDGL/OpenGLUtilsForward.h \
+		../../thirdparty/glm/glm/matrix.hpp \
 		../../thirdparty/glm/glm/mat2x2.hpp \
 		../../thirdparty/glm/glm/ext/matrix_double2x2.hpp \
 		../../thirdparty/glm/glm/detail/type_mat2x2.hpp \
@@ -883,7 +930,9 @@ compiler_clean:
 		../../FDGL/include/FDGL/BaseOpenGLWindow.h \
 		../../FDGL/test/GLUtils.h \
 		../../FDGL/include/FDGL/OpenGLTexture.h \
+		../../FDGL/include/FDGL/OpenGLTextureObjectWrapper.h \
 		../../FDGL/include/FDGL/OpenGLUtils.h \
+		../../FDGL/include/FDGL/OpenGLTextureObjectBindGuard.h \
 		../../FDGL/include/FDGL/OpenGLShaderProgram.h \
 		../../FDGL/include/FDGL/OpenGLShader.h \
 		../../thirdparty/glm/glm/gtc/type_ptr.hpp \
@@ -940,25 +989,6 @@ compiler_clean:
 		../../thirdparty/glm/glm/ext/vector_uint1.hpp \
 		../../thirdparty/glm/glm/ext/vector_uint1_sized.hpp \
 		../../thirdparty/glm/glm/gtc/type_ptr.inl \
-		../../thirdparty/assimp/include/assimp/texture.h \
-		../../thirdparty/assimp/include/assimp/types.h \
-		../../thirdparty/assimp/include/assimp/defs.h \
-		../../thirdparty/assimp/include/assimp/config.h \
-		../../thirdparty/assimp/include/assimp/vector2.h \
-		../../thirdparty/assimp/include/assimp/vector3.h \
-		../../thirdparty/assimp/include/assimp/color4.h \
-		../../thirdparty/assimp/include/assimp/matrix3x3.h \
-		../../thirdparty/assimp/include/assimp/matrix4x4.h \
-		../../thirdparty/assimp/include/assimp/quaternion.h \
-		../../thirdparty/assimp/include/assimp/vector2.inl \
-		../../thirdparty/assimp/include/assimp/vector3.inl \
-		../../thirdparty/assimp/include/assimp/color4.inl \
-		../../thirdparty/assimp/include/assimp/matrix3x3.inl \
-		../../thirdparty/assimp/include/assimp/matrix4x4.inl \
-		../../thirdparty/assimp/include/assimp/MathFunctions.h \
-		../../thirdparty/assimp/include/assimp/quaternion.inl \
-		../../thirdparty/assimp/include/assimp/Compiler/pushpack1.h \
-		../../thirdparty/assimp/include/assimp/Compiler/poppack1.h \
 		../../FDGL/test/Renderer.h \
 		../../FDGL/include/FDGL/OpenGLVertexArray.h \
 		../../FD3D/include/FD3D/Camera/Camera.h \
@@ -977,43 +1007,65 @@ compiler_clean:
 		../include/FDEngine/BaseEngine.h \
 		../../FDCore/include/FDCore/TimeManager.h \
 		../../FDCore/include/FDCore/Macros.h \
+		../../FDCore/include/FDCore/ResourceManager.h \
+		../../FDCore/include/FDCore/AbstractResource.h \
+		../../FDCore/include/FDCore/Object.h \
+		../../FDCore/include/FDCore/TypeInformation.h \
+		../../FDCore/include/FDCore/ComparableTrait.h \
+		../../FD3D/include/FD3D/SceneGraph/SceneManager.h \
 		../../FD3D/include/FD3D/SceneGraph/Scene.h \
 		../../FD3D/include/FD3D/SceneGraph/SceneNode.h \
+		../../FD3D/include/FD3D/SceneGraph/Element.h \
 		../../FDCore/include/FDCore/Identifiable.h \
-		../../FDCore/include/FDCore/ComparableTrait.h \
-		../../FDCore/include/FDCore/TypeInformation.h \
 		../../FD3D/include/FD3D/SceneGraph/Component.h \
 		../../FDCore/include/FDCore/AssociativeContainer.h \
-		../../FDGL/include/FDGL/BaseOpenGLContext.h \
-		../../FDGL/include/FDGL/OpenGLResource.h \
-		../../FDGL/include/FDGL/OpenGLUtilsForward.h \
-		../../thirdparty/glm/glm/matrix.hpp \
+		../../FD3D/include/FD3D/SceneGraph/SceneNodeProxy.h \
+		../../thirdparty/assimp/include/assimp/scene.h \
+		../../thirdparty/assimp/include/assimp/types.h \
+		../../thirdparty/assimp/include/assimp/defs.h \
+		../../thirdparty/assimp/include/assimp/config.h \
+		../../thirdparty/assimp/include/assimp/vector2.h \
+		../../thirdparty/assimp/include/assimp/vector3.h \
+		../../thirdparty/assimp/include/assimp/color4.h \
+		../../thirdparty/assimp/include/assimp/matrix3x3.h \
+		../../thirdparty/assimp/include/assimp/matrix4x4.h \
+		../../thirdparty/assimp/include/assimp/quaternion.h \
+		../../thirdparty/assimp/include/assimp/vector2.inl \
+		../../thirdparty/assimp/include/assimp/vector3.inl \
+		../../thirdparty/assimp/include/assimp/color4.inl \
+		../../thirdparty/assimp/include/assimp/matrix3x3.inl \
+		../../thirdparty/assimp/include/assimp/matrix4x4.inl \
+		../../thirdparty/assimp/include/assimp/MathFunctions.h \
+		../../thirdparty/assimp/include/assimp/quaternion.inl \
+		../../thirdparty/assimp/include/assimp/texture.h \
+		../../thirdparty/assimp/include/assimp/Compiler/pushpack1.h \
+		../../thirdparty/assimp/include/assimp/Compiler/poppack1.h \
+		../../thirdparty/assimp/include/assimp/mesh.h \
+		../../thirdparty/assimp/include/assimp/aabb.h \
+		../../thirdparty/assimp/include/assimp/light.h \
+		../../thirdparty/assimp/include/assimp/camera.h \
+		../../thirdparty/assimp/include/assimp/material.h \
+		../../thirdparty/assimp/include/assimp/material.inl \
+		../../thirdparty/assimp/include/assimp/anim.h \
+		../../thirdparty/assimp/include/assimp/metadata.h \
+		../../thirdparty/assimp/include/assimp/Compiler/pstdint.h \
+		../../thirdparty/assimp/include/assimp/postprocess.h \
+		../../FD3D/include/FD3D/Mesh/Mesh.h \
+		../../FD3D/include/FD3D/Mesh/AbstractMesh.h \
+		../../FDCore/include/FDCore/EnumFlag.h \
+		../../FDCore/include/FDCore/BaseResource.h \
+		../../FD3D/include/FD3D/Material/Material.h \
+		../../thirdparty/glm/glm/vec3.hpp \
+		../../thirdparty/glm/glm/ext/vector_bool3.hpp \
+		../../thirdparty/glm/glm/detail/type_vec3.hpp \
 		../../thirdparty/glm/glm/detail/qualifier.hpp \
 		../../thirdparty/glm/glm/detail/setup.hpp \
 		../../thirdparty/glm/glm/simd/platform.h \
 		../../thirdparty/glm/glm/simd/neon.h \
-		../../thirdparty/glm/glm/vec2.hpp \
-		../../thirdparty/glm/glm/ext/vector_bool2.hpp \
-		../../thirdparty/glm/glm/detail/type_vec2.hpp \
 		../../thirdparty/glm/glm/detail/_swizzle.hpp \
 		../../thirdparty/glm/glm/detail/_swizzle_func.hpp \
-		../../thirdparty/glm/glm/detail/type_vec2.inl \
-		../../thirdparty/glm/glm/detail/compute_vector_relational.hpp \
-		../../thirdparty/glm/glm/ext/vector_bool2_precision.hpp \
-		../../thirdparty/glm/glm/ext/vector_float2.hpp \
-		../../thirdparty/glm/glm/ext/vector_float2_precision.hpp \
-		../../thirdparty/glm/glm/ext/vector_double2.hpp \
-		../../thirdparty/glm/glm/ext/vector_double2_precision.hpp \
-		../../thirdparty/glm/glm/ext/vector_int2.hpp \
-		../../thirdparty/glm/glm/ext/vector_int2_sized.hpp \
-		../../thirdparty/glm/glm/ext/scalar_int_sized.hpp \
-		../../thirdparty/glm/glm/ext/vector_uint2.hpp \
-		../../thirdparty/glm/glm/ext/vector_uint2_sized.hpp \
-		../../thirdparty/glm/glm/ext/scalar_uint_sized.hpp \
-		../../thirdparty/glm/glm/vec3.hpp \
-		../../thirdparty/glm/glm/ext/vector_bool3.hpp \
-		../../thirdparty/glm/glm/detail/type_vec3.hpp \
 		../../thirdparty/glm/glm/detail/type_vec3.inl \
+		../../thirdparty/glm/glm/detail/compute_vector_relational.hpp \
 		../../thirdparty/glm/glm/ext/vector_bool3_precision.hpp \
 		../../thirdparty/glm/glm/ext/vector_float3.hpp \
 		../../thirdparty/glm/glm/ext/vector_float3_precision.hpp \
@@ -1021,8 +1073,13 @@ compiler_clean:
 		../../thirdparty/glm/glm/ext/vector_double3_precision.hpp \
 		../../thirdparty/glm/glm/ext/vector_int3.hpp \
 		../../thirdparty/glm/glm/ext/vector_int3_sized.hpp \
+		../../thirdparty/glm/glm/ext/scalar_int_sized.hpp \
 		../../thirdparty/glm/glm/ext/vector_uint3.hpp \
 		../../thirdparty/glm/glm/ext/vector_uint3_sized.hpp \
+		../../thirdparty/glm/glm/ext/scalar_uint_sized.hpp \
+		../../FD3D/include/FD3D/Material/AbstractTexture.h \
+		../../FD3D/include/FD3D/Utils/VertexProxy.h \
+		../../FDCore/include/FDCore/CRTPTrait.h \
 		../../thirdparty/glm/glm/vec4.hpp \
 		../../thirdparty/glm/glm/ext/vector_bool4.hpp \
 		../../thirdparty/glm/glm/detail/type_vec4.hpp \
@@ -1037,6 +1094,26 @@ compiler_clean:
 		../../thirdparty/glm/glm/ext/vector_int4_sized.hpp \
 		../../thirdparty/glm/glm/ext/vector_uint4.hpp \
 		../../thirdparty/glm/glm/ext/vector_uint4_sized.hpp \
+		../../thirdparty/glm/glm/vec2.hpp \
+		../../thirdparty/glm/glm/ext/vector_bool2.hpp \
+		../../thirdparty/glm/glm/detail/type_vec2.hpp \
+		../../thirdparty/glm/glm/detail/type_vec2.inl \
+		../../thirdparty/glm/glm/ext/vector_bool2_precision.hpp \
+		../../thirdparty/glm/glm/ext/vector_float2.hpp \
+		../../thirdparty/glm/glm/ext/vector_float2_precision.hpp \
+		../../thirdparty/glm/glm/ext/vector_double2.hpp \
+		../../thirdparty/glm/glm/ext/vector_double2_precision.hpp \
+		../../thirdparty/glm/glm/ext/vector_int2.hpp \
+		../../thirdparty/glm/glm/ext/vector_int2_sized.hpp \
+		../../thirdparty/glm/glm/ext/vector_uint2.hpp \
+		../../thirdparty/glm/glm/ext/vector_uint2_sized.hpp \
+		../../FD3D/include/FD3D/Utils/IndexProxy.h \
+		../../FDGL/include/FDGL/BaseOpenGLContext.h \
+		../../FDGL/include/FDGL/OpenGLResource.h \
+		../../FDGL/include/FDGL/OpenGLObject.h \
+		../../FDGL/include/FDGL/OpenGLObjectWrapper.h \
+		../../FDGL/include/FDGL/OpenGLUtilsForward.h \
+		../../thirdparty/glm/glm/matrix.hpp \
 		../../thirdparty/glm/glm/mat2x2.hpp \
 		../../thirdparty/glm/glm/ext/matrix_double2x2.hpp \
 		../../thirdparty/glm/glm/detail/type_mat2x2.hpp \
@@ -1146,12 +1223,8 @@ compiler_clean:
 		../../thirdparty/pybind11/include/pybind11/detail/class.h \
 		../../thirdparty/pybind11/include/pybind11/detail/init.h \
 		../../thirdparty/pybind11/include/pybind11/eval.h \
-		../../FDGL/include/FDGL/BufferedMesh.h \
-		../../FD3D/include/FD3D/Mesh/AbstractMesh.h \
-		../../FD3D/include/FD3D/Utils/VertexProxy.h \
-		../../FDCore/include/FDCore/EnumFlag.h \
-		../../FDCore/include/FDCore/CRTPTrait.h \
-		../../FD3D/include/FD3D/Utils/IndexProxy.h \
+		../../FDGL/include/FDGL/BufferedMeshComponent.h \
+		../../FD3D/include/FD3D/Mesh/AbstractMeshComponent.h \
 		../../FDGL/include/FDGL/OpenGLVertexArray.h \
 		../../FDGL/include/FDGL/OpenGLBuffer.h \
 		../../FDGL/include/FDGL/OpenGLUtils.h \
@@ -1214,6 +1287,8 @@ compiler_clean:
 		../../thirdparty/glm/glm/ext/vector_uint1_sized.hpp \
 		../../thirdparty/glm/glm/gtc/type_ptr.inl \
 		../../FDGL/include/FDGL/OpenGLTexture.h \
+		../../FDGL/include/FDGL/OpenGLTextureObjectWrapper.h \
+		../../FDGL/include/FDGL/OpenGLTextureObjectBindGuard.h \
 		../../FD3D/include/FD3D/Camera/Camera.h \
 		../../FD3D/include/FD3D/Utils/Transform.h \
 		../../FD3D/include/FD3D/Camera/Projection.h \
@@ -1225,63 +1300,61 @@ compiler_clean:
 		../../FD3D/include/FD3D/Light/LightType.h \
 		../../FD3D/include/FD3D/Utils/TransformStack.h \
 		../../FDGL/test/GLUtils.h \
-		../../thirdparty/assimp/include/assimp/texture.h \
-		../../thirdparty/assimp/include/assimp/types.h \
-		../../thirdparty/assimp/include/assimp/defs.h \
-		../../thirdparty/assimp/include/assimp/config.h \
-		../../thirdparty/assimp/include/assimp/vector2.h \
-		../../thirdparty/assimp/include/assimp/vector3.h \
-		../../thirdparty/assimp/include/assimp/color4.h \
-		../../thirdparty/assimp/include/assimp/matrix3x3.h \
-		../../thirdparty/assimp/include/assimp/matrix4x4.h \
-		../../thirdparty/assimp/include/assimp/quaternion.h \
-		../../thirdparty/assimp/include/assimp/vector2.inl \
-		../../thirdparty/assimp/include/assimp/vector3.inl \
-		../../thirdparty/assimp/include/assimp/color4.inl \
-		../../thirdparty/assimp/include/assimp/matrix3x3.inl \
-		../../thirdparty/assimp/include/assimp/matrix4x4.inl \
-		../../thirdparty/assimp/include/assimp/MathFunctions.h \
-		../../thirdparty/assimp/include/assimp/quaternion.inl \
-		../../thirdparty/assimp/include/assimp/Compiler/pushpack1.h \
-		../../thirdparty/assimp/include/assimp/Compiler/poppack1.h \
 		../../FDGL/test/GLFWImpl.h \
 		../../FD3D/include/FD3D/SceneGraph/SceneLoader.h \
 		../../thirdparty/assimp/include/assimp/Importer.hpp \
-		../../thirdparty/assimp/include/assimp/postprocess.h \
-		../../thirdparty/assimp/include/assimp/light.h \
-		../../thirdparty/assimp/include/assimp/scene.h \
-		../../thirdparty/assimp/include/assimp/mesh.h \
-		../../thirdparty/assimp/include/assimp/aabb.h \
-		../../thirdparty/assimp/include/assimp/camera.h \
-		../../thirdparty/assimp/include/assimp/material.h \
-		../../thirdparty/assimp/include/assimp/material.inl \
-		../../thirdparty/assimp/include/assimp/anim.h \
-		../../thirdparty/assimp/include/assimp/metadata.h \
-		../../thirdparty/assimp/include/assimp/Compiler/pstdint.h \
-		../../FD3D/include/FD3D/Material/Material.h \
-		../../FD3D/include/FD3D/Material/Texture.h \
-		../../FD3D/include/FD3D/Mesh/Mesh.h \
-		../../FD3D/include/FD3D/Behavior/StrategyBehavior.h \
-		../../FD3D/include/FD3D/Behavior/Behavior.h \
+		../../FD3D/include/FD3D/Material/MaterialComponent.h \
+		../../FD3D/include/FD3D/Material/TextureComponent.h \
+		../../FD3D/include/FD3D/Mesh/MeshComponent.h \
+		../../FD3D/include/FD3D/Behavior/StrategyBehaviorComponent.h \
+		../../FD3D/include/FD3D/Behavior/BehaviorComponent.h \
+		../../FD3D/include/FD3D/Behavior/AbstractBehaviorComponent.h \
+		../../FDCore/include/FDCore/Binding/Python/FDCorePython.h \
+		../../FDCore/include/FDCore/Binding/Python/ThreadPool_python.h \
+		../../FDCore/include/FDCore/Binding/Python/TimeManager_python.h \
+		../../FD3D/include/FD3D/Binding/Python/FD3DPython.h \
+		../../FD3D/include/FD3D/Binding/Python/Glm_vec_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Projection_python.h \
+		../../FD3D/include/FD3D/Binding/Python/VertexProxy_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Component_python.h \
+		../../FD3D/include/FD3D/Binding/Python/SceneNode_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Transform_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Behavior_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Scene_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Camera_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Light_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Material_python.h \
+		../../FD3D/include/FD3D/Binding/Python/Mesh_python.h \
+		../../FD3D/include/FD3D/Serialization/Json/FD3DJson_fwd.h \
+		../../FDJson/include/FDJson/FDJson.h \
+		../../FDSerialize/include/FDSerialize/SerializerBase.h \
 		../../FDJson/include/FDJson/Json_fwd.h \
 		../../FDJson/include/FDJson/Json_primitive_fwd.h \
 		../../thirdparty/rapidjson/include/rapidjson/fwd.h \
 		../../thirdparty/rapidjson/include/rapidjson/rapidjson.h \
 		../../thirdparty/rapidjson/include/rapidjson/msinttypes/stdint.h \
 		../../thirdparty/rapidjson/include/rapidjson/msinttypes/inttypes.h \
-		../../FDJson/include/FDJson/FDJson.h \
-		../../FDSerialize/include/FDSerialize/SerializerBase.h \
 		../../FDJson/include/FDJson/Json_array_fwd.h \
 		../../FDJson/include/FDJson/Json_list_fwd.h \
 		../../FDJson/include/FDJson/Json_tuple_fwd.h \
 		../../FDJson/include/FDJson/Json_set_fwd.h \
 		../../FDJson/include/FDJson/Json_map_fwd.h \
-		../../FD3D/include/FD3D/Serialization/Json/FD3D_Json_fwd.h \
-		../../FD3D/include/FD3D/Serialization/Json/Glm_Json_fwd.h \
+		../../FDCore/include/FDCore/Serialization/Json/FDCoreJson_fwd.h \
+		../../FDCore/include/FDCore/Serialization/Json/Resource_json_fwd.h \
+		../../FDCore/include/FDCore/Serialization/Json/Object_json_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Json/Glm_json_fwd.h \
 		../../FD3D/include/FD3D/Serialization/Glm_Serialize_utils.h \
-		../../FD3D/include/FD3D/Serialization/Json/SceneNode_Json_fwd.h \
-		../../FDJson/include/FDJson/Json_utils.h \
-		../../FDJson/include/FDJson/Json_primitive.h \
+		../../FD3D/include/FD3D/Serialization/Json/Element_json_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Json/Component_json_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Json/Transform_json_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Json/Projection_json_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Json/Camera_json_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Json/Light_json_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Json/Material_json_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Json/Mesh_json_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Json/VertexProxy_json_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Json/SceneNode_json_fwd.h \
+		../../FD3D/include/FD3D/Serialization/Json/Scene_json_fwd.h \
 		../../FDJson/include/FDJson/JsonSerializer.h \
 		../../thirdparty/rapidjson/include/rapidjson/document.h \
 		../../thirdparty/rapidjson/include/rapidjson/reader.h \
@@ -1301,48 +1374,43 @@ compiler_clean:
 		../../thirdparty/rapidjson/include/rapidjson/internal/pow10.h \
 		../../thirdparty/rapidjson/include/rapidjson/error/error.h \
 		../../thirdparty/rapidjson/include/rapidjson/internal/strfunc.h \
+		../../FD3D/include/FD3D/Serialization/Json/FD3DJson.h \
+		../../FDJson/include/FDJson/Json.h \
+		../../FDJson/include/FDJson/Json_primitive.h \
 		../../FDJson/include/FDJson/Json_array.h \
 		../../FDJson/include/FDJson/Json_list.h \
 		../../FDJson/include/FDJson/Json_tuple.h \
 		../../FDJson/include/FDJson/Json_set.h \
 		../../FDJson/include/FDJson/Json_map.h \
-		../../FD3D/include/FD3D/Serialization/Json/FD3D_Json_utils.h \
-		../../FD3D/include/FD3D/Serialization/Json/Glm_Json_utils.h \
-		../../FD3D/include/FD3D/Serialization/Json/Transform_Json.h \
-		../../FD3D/include/FD3D/Serialization/Json/VertexProxy_Json.h \
-		../../FD3D/include/FD3D/Serialization/Json/Projection_Json.h \
-		../../FD3D/include/FD3D/Serialization/Json/Component_Json.h \
-		../../FD3D/include/FD3D/Serialization/Json/SceneNode_Json.h \
-		../../FD3D/include/FD3D/Serialization/Json/Camera_Json.h \
-		../../FD3D/include/FD3D/Serialization/Json/Light_Json.h \
-		../../FD3D/include/FD3D/Serialization/Json/Material_Json.h \
-		../../FD3D/include/FD3D/Serialization/Json/Mesh_Json.h \
-		../../thirdparty/pybind11/include/pybind11/operators.h \
-		../../thirdparty/pybind11/include/pybind11/stl.h \
-		../../FDCore/include/FDCore/Binding/Python/FDCorePython.h \
-		../../FDCore/include/FDCore/Binding/Python/ThreadPool_python.h \
-		../../FDCore/include/FDCore/Binding/Python/TimeManager_python.h \
-		../../FD3D/include/FD3D/Binding/Python/FD3DPython.h \
-		../../FD3D/include/FD3D/Binding/Python/Glm_vec_python.h \
-		../../FD3D/include/FD3D/Binding/Python/Projection_python.h \
-		../../FD3D/include/FD3D/Binding/Python/VertexProxy_python.h \
-		../../FD3D/include/FD3D/Binding/Python/Component_python.h \
-		../../FD3D/include/FD3D/Binding/Python/SceneNode_python.h \
-		../../FD3D/include/FD3D/Binding/Python/Transform_python.h \
-		../../FD3D/include/FD3D/Binding/Python/Behavior_python.h \
-		../../FD3D/include/FD3D/Binding/Python/Scene_python.h \
-		../../FD3D/include/FD3D/Binding/Python/Camera_python.h \
-		../../FD3D/include/FD3D/Binding/Python/Light_python.h \
-		../../FD3D/include/FD3D/Binding/Python/Material_python.h \
-		../../FD3D/include/FD3D/Binding/Python/Mesh_python.h
+		../../FDCore/include/FDCore/Serialization/Json/FDCoreJson.h \
+		../../FDCore/include/FDCore/Serialization/Json/Resource_json.h \
+		../../FDCore/include/FDCore/Serialization/Json/Object_json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Glm_json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Element_json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Component_json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Transform_json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Projection_json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Camera_json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Light_json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Material_json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Mesh_json.h \
+		../../FD3D/include/FD3D/Serialization/Json/VertexProxy_json.h \
+		../../FD3D/include/FD3D/Serialization/Json/SceneNode_json.h \
+		../../FD3D/include/FD3D/Serialization/Json/Scene_json.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../../build/obj/FDEngine_test/Engine.o Engine.cpp
 
 ../../build/obj/FDEngine_test/GLFWImpl.o: GLFWImpl.cpp GLFWImpl.h \
 		../../FDGL/include/FDGL/BaseOpenGLContext.h \
 		../../FDCore/include/FDCore/AssociativeContainer.h \
 		../../FDCore/include/FDCore/ComparableTrait.h \
-		../../FDCore/include/FDCore/Macros.h \
 		../../FDGL/include/FDGL/OpenGLResource.h \
+		../../FDGL/include/FDGL/OpenGLObject.h \
+		../../FDGL/include/FDGL/OpenGLObjectWrapper.h \
+		../../FDCore/include/FDCore/BaseResource.h \
+		../../FDCore/include/FDCore/AbstractResource.h \
+		../../FDCore/include/FDCore/Object.h \
+		../../FDCore/include/FDCore/TypeInformation.h \
+		../../FDCore/include/FDCore/Macros.h \
 		../../FDGL/include/FDGL/OpenGLUtilsForward.h \
 		../../thirdparty/glm/glm/matrix.hpp \
 		../../thirdparty/glm/glm/detail/qualifier.hpp \
@@ -1486,7 +1554,16 @@ compiler_clean:
 
 ../../build/obj/FDEngine_test/GLUtils.o: GLUtils.cpp GLUtils.h \
 		../../FDGL/include/FDGL/OpenGLTexture.h \
+		../../FDGL/include/FDGL/OpenGLTextureObjectWrapper.h \
 		../../FDGL/include/FDGL/OpenGLResource.h \
+		../../FDGL/include/FDGL/OpenGLObject.h \
+		../../FDGL/include/FDGL/OpenGLObjectWrapper.h \
+		../../FDCore/include/FDCore/BaseResource.h \
+		../../FDCore/include/FDCore/AbstractResource.h \
+		../../FDCore/include/FDCore/Object.h \
+		../../FDCore/include/FDCore/TypeInformation.h \
+		../../FDCore/include/FDCore/Macros.h \
+		../../FDCore/include/FDCore/ComparableTrait.h \
 		../../FDGL/include/FDGL/OpenGLUtils.h \
 		../../thirdparty/glad/include/glad/glad.h \
 		../../thirdparty/glad/include/KHR/khrplatform.h \
@@ -1628,6 +1705,29 @@ compiler_clean:
 		../../thirdparty/glm/glm/simd/geometric.h \
 		../../thirdparty/glm/glm/detail/func_matrix_simd.inl \
 		../../thirdparty/glm/glm/simd/matrix.h \
+		../../FDGL/include/FDGL/OpenGLTextureObjectBindGuard.h \
+		../../FD3D/include/FD3D/Material/AbstractTexture.h \
+		../../thirdparty/assimp/include/assimp/material.h \
+		../../thirdparty/assimp/include/assimp/types.h \
+		../../thirdparty/assimp/include/assimp/defs.h \
+		../../thirdparty/assimp/include/assimp/config.h \
+		../../thirdparty/assimp/include/assimp/vector2.h \
+		../../thirdparty/assimp/include/assimp/vector3.h \
+		../../thirdparty/assimp/include/assimp/color4.h \
+		../../thirdparty/assimp/include/assimp/matrix3x3.h \
+		../../thirdparty/assimp/include/assimp/matrix4x4.h \
+		../../thirdparty/assimp/include/assimp/quaternion.h \
+		../../thirdparty/assimp/include/assimp/vector2.inl \
+		../../thirdparty/assimp/include/assimp/vector3.inl \
+		../../thirdparty/assimp/include/assimp/color4.inl \
+		../../thirdparty/assimp/include/assimp/matrix3x3.inl \
+		../../thirdparty/assimp/include/assimp/matrix4x4.inl \
+		../../thirdparty/assimp/include/assimp/MathFunctions.h \
+		../../thirdparty/assimp/include/assimp/quaternion.inl \
+		../../thirdparty/assimp/include/assimp/Compiler/pushpack1.h \
+		../../thirdparty/assimp/include/assimp/Compiler/poppack1.h \
+		../../thirdparty/assimp/include/assimp/material.inl \
+		../../thirdparty/assimp/include/assimp/texture.h \
 		../../FDGL/include/FDGL/OpenGLShaderProgram.h \
 		../../FDGL/include/FDGL/OpenGLShader.h \
 		../../thirdparty/glm/glm/gtc/type_ptr.hpp \
@@ -1684,25 +1784,6 @@ compiler_clean:
 		../../thirdparty/glm/glm/ext/vector_uint1.hpp \
 		../../thirdparty/glm/glm/ext/vector_uint1_sized.hpp \
 		../../thirdparty/glm/glm/gtc/type_ptr.inl \
-		../../thirdparty/assimp/include/assimp/texture.h \
-		../../thirdparty/assimp/include/assimp/types.h \
-		../../thirdparty/assimp/include/assimp/defs.h \
-		../../thirdparty/assimp/include/assimp/config.h \
-		../../thirdparty/assimp/include/assimp/vector2.h \
-		../../thirdparty/assimp/include/assimp/vector3.h \
-		../../thirdparty/assimp/include/assimp/color4.h \
-		../../thirdparty/assimp/include/assimp/matrix3x3.h \
-		../../thirdparty/assimp/include/assimp/matrix4x4.h \
-		../../thirdparty/assimp/include/assimp/quaternion.h \
-		../../thirdparty/assimp/include/assimp/vector2.inl \
-		../../thirdparty/assimp/include/assimp/vector3.inl \
-		../../thirdparty/assimp/include/assimp/color4.inl \
-		../../thirdparty/assimp/include/assimp/matrix3x3.inl \
-		../../thirdparty/assimp/include/assimp/matrix4x4.inl \
-		../../thirdparty/assimp/include/assimp/MathFunctions.h \
-		../../thirdparty/assimp/include/assimp/quaternion.inl \
-		../../thirdparty/assimp/include/assimp/Compiler/pushpack1.h \
-		../../thirdparty/assimp/include/assimp/Compiler/poppack1.h \
 		../../thirdparty/stb/stb_image.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../../build/obj/FDEngine_test/GLUtils.o GLUtils.cpp
 
@@ -1713,6 +1794,12 @@ compiler_clean:
 		../../FDCore/include/FDCore/AssociativeContainer.h \
 		../../FDCore/include/FDCore/ComparableTrait.h \
 		../../FDGL/include/FDGL/OpenGLResource.h \
+		../../FDGL/include/FDGL/OpenGLObject.h \
+		../../FDGL/include/FDGL/OpenGLObjectWrapper.h \
+		../../FDCore/include/FDCore/BaseResource.h \
+		../../FDCore/include/FDCore/AbstractResource.h \
+		../../FDCore/include/FDCore/Object.h \
+		../../FDCore/include/FDCore/TypeInformation.h \
 		../../FDGL/include/FDGL/OpenGLUtilsForward.h \
 		../../thirdparty/glm/glm/matrix.hpp \
 		../../thirdparty/glm/glm/detail/qualifier.hpp \
@@ -1912,33 +1999,10 @@ compiler_clean:
 		../../thirdparty/glm/glm/ext/vector_uint1_sized.hpp \
 		../../thirdparty/glm/glm/gtc/type_ptr.inl \
 		../../FDGL/include/FDGL/OpenGLTexture.h \
-		../../FDGL/include/FDGL/BaseRenderer.h \
-		../../FD3D/include/FD3D/SceneGraph/Scene.h \
-		../../FD3D/include/FD3D/SceneGraph/SceneNode.h \
-		../../FDCore/include/FDCore/Identifiable.h \
-		../../FDCore/include/FDCore/TypeInformation.h \
-		../../FD3D/include/FD3D/SceneGraph/Component.h \
-		../../FDGL/include/FDGL/OpenGLVertexArray.h \
-		../../FD3D/include/FD3D/Camera/Camera.h \
-		../../FD3D/include/FD3D/Utils/Transform.h \
-		../../FD3D/include/FD3D/Camera/Projection.h \
-		../../FD3D/include/FD3D/Camera/ProjectionType.h \
-		../../FD3D/include/FD3D/Light/Light.h \
-		../../FD3D/include/FD3D/Light/LightColor.h \
-		../../FD3D/include/FD3D/Light/LightAttenuation.h \
-		../../FD3D/include/FD3D/Light/LightCone.h \
-		../../FD3D/include/FD3D/Light/LightType.h \
-		../../FD3D/include/FD3D/Utils/TransformStack.h \
-		../../FDGL/include/FDGL/BufferedMesh.h \
-		../../FD3D/include/FD3D/Mesh/AbstractMesh.h \
-		../../FD3D/include/FD3D/Utils/VertexProxy.h \
-		../../FDCore/include/FDCore/EnumFlag.h \
-		../../FDCore/include/FDCore/CRTPTrait.h \
-		../../FD3D/include/FD3D/Utils/IndexProxy.h \
-		../../FDGL/include/FDGL/OpenGLBuffer.h \
-		../../FDGL/include/FDGL/ShaderComponent.h \
-		../../FD3D/include/FD3D/SceneGraph/SceneLoader.h \
-		../../thirdparty/assimp/include/assimp/Importer.hpp \
+		../../FDGL/include/FDGL/OpenGLTextureObjectWrapper.h \
+		../../FDGL/include/FDGL/OpenGLTextureObjectBindGuard.h \
+		../../FD3D/include/FD3D/Material/AbstractTexture.h \
+		../../thirdparty/assimp/include/assimp/material.h \
 		../../thirdparty/assimp/include/assimp/types.h \
 		../../thirdparty/assimp/include/assimp/defs.h \
 		../../thirdparty/assimp/include/assimp/config.h \
@@ -1955,23 +2019,55 @@ compiler_clean:
 		../../thirdparty/assimp/include/assimp/matrix4x4.inl \
 		../../thirdparty/assimp/include/assimp/MathFunctions.h \
 		../../thirdparty/assimp/include/assimp/quaternion.inl \
-		../../thirdparty/assimp/include/assimp/postprocess.h \
-		../../thirdparty/assimp/include/assimp/light.h \
-		../../thirdparty/assimp/include/assimp/scene.h \
-		../../thirdparty/assimp/include/assimp/texture.h \
 		../../thirdparty/assimp/include/assimp/Compiler/pushpack1.h \
 		../../thirdparty/assimp/include/assimp/Compiler/poppack1.h \
+		../../thirdparty/assimp/include/assimp/material.inl \
+		../../thirdparty/assimp/include/assimp/texture.h \
+		../../FDGL/include/FDGL/BaseRenderer.h \
+		../../FD3D/include/FD3D/SceneGraph/Scene.h \
+		../../FD3D/include/FD3D/SceneGraph/SceneNode.h \
+		../../FD3D/include/FD3D/SceneGraph/Element.h \
+		../../FDCore/include/FDCore/Identifiable.h \
+		../../FD3D/include/FD3D/SceneGraph/Component.h \
+		../../FD3D/include/FD3D/SceneGraph/SceneNodeProxy.h \
+		../../FDGL/include/FDGL/OpenGLVertexArray.h \
+		../../FD3D/include/FD3D/Camera/Camera.h \
+		../../FD3D/include/FD3D/Utils/Transform.h \
+		../../FD3D/include/FD3D/Camera/Projection.h \
+		../../FD3D/include/FD3D/Camera/ProjectionType.h \
+		../../FDCore/include/FDCore/ResourceManager.h \
+		../../thirdparty/assimp/include/assimp/camera.h \
+		../../FD3D/include/FD3D/Light/Light.h \
+		../../FD3D/include/FD3D/Light/LightColor.h \
+		../../FD3D/include/FD3D/Light/LightAttenuation.h \
+		../../FD3D/include/FD3D/Light/LightCone.h \
+		../../FD3D/include/FD3D/Light/LightType.h \
+		../../thirdparty/assimp/include/assimp/light.h \
+		../../FD3D/include/FD3D/Utils/TransformStack.h \
+		../../FDGL/include/FDGL/BufferedMeshComponent.h \
+		../../FD3D/include/FD3D/Mesh/AbstractMeshComponent.h \
+		../../FD3D/include/FD3D/Mesh/AbstractMesh.h \
+		../../FDCore/include/FDCore/EnumFlag.h \
+		../../FD3D/include/FD3D/Material/Material.h \
+		../../FD3D/include/FD3D/Utils/VertexProxy.h \
+		../../FDCore/include/FDCore/CRTPTrait.h \
+		../../FD3D/include/FD3D/Utils/IndexProxy.h \
+		../../thirdparty/assimp/include/assimp/scene.h \
 		../../thirdparty/assimp/include/assimp/mesh.h \
 		../../thirdparty/assimp/include/assimp/aabb.h \
-		../../thirdparty/assimp/include/assimp/camera.h \
-		../../thirdparty/assimp/include/assimp/material.h \
-		../../thirdparty/assimp/include/assimp/material.inl \
 		../../thirdparty/assimp/include/assimp/anim.h \
 		../../thirdparty/assimp/include/assimp/metadata.h \
 		../../thirdparty/assimp/include/assimp/Compiler/pstdint.h \
-		../../FD3D/include/FD3D/Material/Material.h \
-		../../FD3D/include/FD3D/Material/Texture.h \
+		../../FDGL/include/FDGL/OpenGLBuffer.h \
+		../../FDGL/include/FDGL/ShaderComponent.h \
+		../../FD3D/include/FD3D/SceneGraph/SceneLoader.h \
+		../../thirdparty/assimp/include/assimp/Importer.hpp \
+		../../thirdparty/assimp/include/assimp/postprocess.h \
+		../../FD3D/include/FD3D/SceneGraph/SceneManager.h \
 		../../FD3D/include/FD3D/Mesh/Mesh.h \
+		../../FD3D/include/FD3D/Material/MaterialComponent.h \
+		../../FD3D/include/FD3D/Material/TextureComponent.h \
+		../../FD3D/include/FD3D/Mesh/MeshComponent.h \
 		GLUtils.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../../build/obj/FDEngine_test/Renderer.o Renderer.cpp
 

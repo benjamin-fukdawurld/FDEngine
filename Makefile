@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = FDEngine1.0.0
-DISTDIR = /home/benjamin/dev/FanatikDevelopment/build/.obj/FDEngine/FDEngine1.0.0
+DISTDIR = /home/benjamin/dev/FanatikDevelopment/build/obj/FDEngine/FDEngine1.0.0
 LINK          = g++
 LFLAGS        = -shared -Wl,-soname,libFDEngine.so.1
 LIBS          = $(SUBLIBS) -L../build/lib -L../thirdparty/assimp/bin -lglad -lFDGL -lFD3D -lFDCore -lassimp -lglfw -lGL -lpthread -ldl -lX11 -lXrandr -lstdc++   
@@ -48,12 +48,12 @@ STRIP         = strip
 
 ####### Output directory
 
-OBJECTS_DIR   = ../build/.obj/FDEngine/
+OBJECTS_DIR   = ../build/obj/FDEngine/
 
 ####### Files
 
 SOURCES       = src/BaseEngine.cpp 
-OBJECTS       = ../build/.obj/FDEngine/BaseEngine.o
+OBJECTS       = ../build/obj/FDEngine/BaseEngine.o
 DIST          = ../../../Qt/5.13.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.13.2/gcc_64/mkspecs/common/unix.conf \
 		../../../Qt/5.13.2/gcc_64/mkspecs/common/linux.conf \
@@ -709,45 +709,68 @@ compiler_clean:
 
 ####### Compile
 
-../build/.obj/FDEngine/BaseEngine.o: src/BaseEngine.cpp include/FDEngine/BaseEngine.h \
+../build/obj/FDEngine/BaseEngine.o: src/BaseEngine.cpp include/FDEngine/BaseEngine.h \
 		../FDCore/include/FDCore/TimeManager.h \
+		../FDCore/include/FDCore/Macros.h \
+		../FDCore/include/FDCore/ResourceManager.h \
+		../FDCore/include/FDCore/AbstractResource.h \
+		../FDCore/include/FDCore/Object.h \
+		../FDCore/include/FDCore/TypeInformation.h \
+		../FDCore/include/FDCore/ComparableTrait.h \
+		../FD3D/include/FD3D/SceneGraph/SceneManager.h \
 		../FD3D/include/FD3D/SceneGraph/Scene.h \
 		../FD3D/include/FD3D/SceneGraph/SceneNode.h \
+		../FD3D/include/FD3D/SceneGraph/Element.h \
 		../FDCore/include/FDCore/Identifiable.h \
-		../FDCore/include/FDCore/ComparableTrait.h \
-		../FDCore/include/FDCore/TypeInformation.h \
 		../FD3D/include/FD3D/SceneGraph/Component.h \
 		../FDCore/include/FDCore/AssociativeContainer.h \
-		../FDGL/include/FDGL/BaseOpenGLContext.h \
-		../FDGL/include/FDGL/OpenGLResource.h \
-		../FDGL/include/FDGL/OpenGLUtilsForward.h \
-		../thirdparty/glm/glm/matrix.hpp \
+		../FD3D/include/FD3D/SceneGraph/SceneNodeProxy.h \
+		../thirdparty/assimp/include/assimp/scene.h \
+		../thirdparty/assimp/include/assimp/types.h \
+		../thirdparty/assimp/include/assimp/defs.h \
+		../thirdparty/assimp/include/assimp/config.h \
+		../thirdparty/assimp/include/assimp/vector2.h \
+		../thirdparty/assimp/include/assimp/vector3.h \
+		../thirdparty/assimp/include/assimp/color4.h \
+		../thirdparty/assimp/include/assimp/matrix3x3.h \
+		../thirdparty/assimp/include/assimp/matrix4x4.h \
+		../thirdparty/assimp/include/assimp/quaternion.h \
+		../thirdparty/assimp/include/assimp/vector2.inl \
+		../thirdparty/assimp/include/assimp/vector3.inl \
+		../thirdparty/assimp/include/assimp/color4.inl \
+		../thirdparty/assimp/include/assimp/matrix3x3.inl \
+		../thirdparty/assimp/include/assimp/matrix4x4.inl \
+		../thirdparty/assimp/include/assimp/MathFunctions.h \
+		../thirdparty/assimp/include/assimp/quaternion.inl \
+		../thirdparty/assimp/include/assimp/texture.h \
+		../thirdparty/assimp/include/assimp/Compiler/pushpack1.h \
+		../thirdparty/assimp/include/assimp/Compiler/poppack1.h \
+		../thirdparty/assimp/include/assimp/mesh.h \
+		../thirdparty/assimp/include/assimp/aabb.h \
+		../thirdparty/assimp/include/assimp/light.h \
+		../thirdparty/assimp/include/assimp/camera.h \
+		../thirdparty/assimp/include/assimp/material.h \
+		../thirdparty/assimp/include/assimp/material.inl \
+		../thirdparty/assimp/include/assimp/anim.h \
+		../thirdparty/assimp/include/assimp/metadata.h \
+		../thirdparty/assimp/include/assimp/Compiler/pstdint.h \
+		../thirdparty/assimp/include/assimp/postprocess.h \
+		../FD3D/include/FD3D/Mesh/Mesh.h \
+		../FD3D/include/FD3D/Mesh/AbstractMesh.h \
+		../FDCore/include/FDCore/EnumFlag.h \
+		../FDCore/include/FDCore/BaseResource.h \
+		../FD3D/include/FD3D/Material/Material.h \
+		../thirdparty/glm/glm/vec3.hpp \
+		../thirdparty/glm/glm/ext/vector_bool3.hpp \
+		../thirdparty/glm/glm/detail/type_vec3.hpp \
 		../thirdparty/glm/glm/detail/qualifier.hpp \
 		../thirdparty/glm/glm/detail/setup.hpp \
 		../thirdparty/glm/glm/simd/platform.h \
 		../thirdparty/glm/glm/simd/neon.h \
-		../thirdparty/glm/glm/vec2.hpp \
-		../thirdparty/glm/glm/ext/vector_bool2.hpp \
-		../thirdparty/glm/glm/detail/type_vec2.hpp \
 		../thirdparty/glm/glm/detail/_swizzle.hpp \
 		../thirdparty/glm/glm/detail/_swizzle_func.hpp \
-		../thirdparty/glm/glm/detail/type_vec2.inl \
-		../thirdparty/glm/glm/detail/compute_vector_relational.hpp \
-		../thirdparty/glm/glm/ext/vector_bool2_precision.hpp \
-		../thirdparty/glm/glm/ext/vector_float2.hpp \
-		../thirdparty/glm/glm/ext/vector_float2_precision.hpp \
-		../thirdparty/glm/glm/ext/vector_double2.hpp \
-		../thirdparty/glm/glm/ext/vector_double2_precision.hpp \
-		../thirdparty/glm/glm/ext/vector_int2.hpp \
-		../thirdparty/glm/glm/ext/vector_int2_sized.hpp \
-		../thirdparty/glm/glm/ext/scalar_int_sized.hpp \
-		../thirdparty/glm/glm/ext/vector_uint2.hpp \
-		../thirdparty/glm/glm/ext/vector_uint2_sized.hpp \
-		../thirdparty/glm/glm/ext/scalar_uint_sized.hpp \
-		../thirdparty/glm/glm/vec3.hpp \
-		../thirdparty/glm/glm/ext/vector_bool3.hpp \
-		../thirdparty/glm/glm/detail/type_vec3.hpp \
 		../thirdparty/glm/glm/detail/type_vec3.inl \
+		../thirdparty/glm/glm/detail/compute_vector_relational.hpp \
 		../thirdparty/glm/glm/ext/vector_bool3_precision.hpp \
 		../thirdparty/glm/glm/ext/vector_float3.hpp \
 		../thirdparty/glm/glm/ext/vector_float3_precision.hpp \
@@ -755,8 +778,13 @@ compiler_clean:
 		../thirdparty/glm/glm/ext/vector_double3_precision.hpp \
 		../thirdparty/glm/glm/ext/vector_int3.hpp \
 		../thirdparty/glm/glm/ext/vector_int3_sized.hpp \
+		../thirdparty/glm/glm/ext/scalar_int_sized.hpp \
 		../thirdparty/glm/glm/ext/vector_uint3.hpp \
 		../thirdparty/glm/glm/ext/vector_uint3_sized.hpp \
+		../thirdparty/glm/glm/ext/scalar_uint_sized.hpp \
+		../FD3D/include/FD3D/Material/AbstractTexture.h \
+		../FD3D/include/FD3D/Utils/VertexProxy.h \
+		../FDCore/include/FDCore/CRTPTrait.h \
 		../thirdparty/glm/glm/vec4.hpp \
 		../thirdparty/glm/glm/ext/vector_bool4.hpp \
 		../thirdparty/glm/glm/detail/type_vec4.hpp \
@@ -771,6 +799,26 @@ compiler_clean:
 		../thirdparty/glm/glm/ext/vector_int4_sized.hpp \
 		../thirdparty/glm/glm/ext/vector_uint4.hpp \
 		../thirdparty/glm/glm/ext/vector_uint4_sized.hpp \
+		../thirdparty/glm/glm/vec2.hpp \
+		../thirdparty/glm/glm/ext/vector_bool2.hpp \
+		../thirdparty/glm/glm/detail/type_vec2.hpp \
+		../thirdparty/glm/glm/detail/type_vec2.inl \
+		../thirdparty/glm/glm/ext/vector_bool2_precision.hpp \
+		../thirdparty/glm/glm/ext/vector_float2.hpp \
+		../thirdparty/glm/glm/ext/vector_float2_precision.hpp \
+		../thirdparty/glm/glm/ext/vector_double2.hpp \
+		../thirdparty/glm/glm/ext/vector_double2_precision.hpp \
+		../thirdparty/glm/glm/ext/vector_int2.hpp \
+		../thirdparty/glm/glm/ext/vector_int2_sized.hpp \
+		../thirdparty/glm/glm/ext/vector_uint2.hpp \
+		../thirdparty/glm/glm/ext/vector_uint2_sized.hpp \
+		../FD3D/include/FD3D/Utils/IndexProxy.h \
+		../FDGL/include/FDGL/BaseOpenGLContext.h \
+		../FDGL/include/FDGL/OpenGLResource.h \
+		../FDGL/include/FDGL/OpenGLObject.h \
+		../FDGL/include/FDGL/OpenGLObjectWrapper.h \
+		../FDGL/include/FDGL/OpenGLUtilsForward.h \
+		../thirdparty/glm/glm/matrix.hpp \
 		../thirdparty/glm/glm/mat2x2.hpp \
 		../thirdparty/glm/glm/ext/matrix_double2x2.hpp \
 		../thirdparty/glm/glm/detail/type_mat2x2.hpp \
@@ -861,7 +909,7 @@ compiler_clean:
 		../FDGL/include/FDGL/BaseRenderer.h \
 		../thirdparty/glad/include/glad/glad.h \
 		../thirdparty/glad/include/KHR/khrplatform.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/.obj/FDEngine/BaseEngine.o src/BaseEngine.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../build/obj/FDEngine/BaseEngine.o src/BaseEngine.cpp
 
 ####### Install
 

@@ -10,9 +10,9 @@
 
 std::string loadFile(const std::string &filePath);
 
-FDGL::OpenGLTextureWrapper loadTexture(const std::string &filePath);
+FDGL::OpenGLTextureObjectWrapper loadTexture(const std::string &filePath);
 
-FDGL::OpenGLTextureWrapper loadTexture(const aiTexture *input);
+FDGL::OpenGLTextureObjectWrapper loadTexture(const aiTexture *input);
 
 FDGL::OpenGLShaderProgramWrapper createShaderProgram();
 

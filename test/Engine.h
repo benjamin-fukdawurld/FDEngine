@@ -39,12 +39,17 @@ class Engine : public FDEngine::BaseEngine
 
         void processInput(FDGL::BaseOpenGLWindow &window);
 
+        void initSceneManager() override;
+
         void initScene();
 
         bool loadScene(const std::string &path);
 
     private:
         void updateTask(std::vector<FD3D::Component::id_type> &behaviorIds);
+
+        void initSerialiseHandler();
+        void initUnserialiseHandler();
 };
 
 #endif // ENGINE_H

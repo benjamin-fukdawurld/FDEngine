@@ -2,7 +2,9 @@
 #define BASEENGINE_H
 
 #include <FDCore/TimeManager.h>
+#include <FDCore/ResourceManager.h>
 
+#include <FD3D/SceneGraph/SceneManager.h>
 #include <FD3D/SceneGraph/Scene.h>
 
 #include <FDGL/BaseOpenGLContext.h>
@@ -16,9 +18,11 @@ namespace FDEngine
             FDGL::BaseOpenGLContext &m_ctx;
             FDGL::BaseOpenGLWindow &m_window;
             FDGL::BaseRenderer &m_renderer;
-            FD3D::Scene m_scene;
-
             FDCore::TimeManager<> m_timeMgr;
+
+            FD3D::Scene m_scene;
+            FDCore::ResourceManager m_resourceManager;
+            FD3D::SceneManager m_sceneManager;
 
         public:
             BaseEngine(FDGL::BaseOpenGLContext &ctx,
@@ -46,6 +50,13 @@ namespace FDEngine
             FDCore::TimeManager<> &getTimeManager();
 
             const FDCore::TimeManager<> &getTimeManager() const;
+
+            FD3D::SceneManager &getSceneManager() { return m_sceneManager; }
+            const FD3D::SceneManager &getSceneManager() const { return m_sceneManager; }
+            FDCore::ResourceManager &getResourceManager() { return m_resourceManager; }
+            const FDCore::ResourceManager &getResourceManager() const { return m_resourceManager; }
+
+            virtual void initSceneManager();
 
             virtual bool init(int argc, char **argv) = 0;
 

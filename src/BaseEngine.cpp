@@ -3,7 +3,8 @@
 FDEngine::BaseEngine::BaseEngine(FDGL::BaseOpenGLContext &ctx, FDGL::BaseOpenGLWindow &window, FDGL::BaseRenderer &renderer) :
     m_ctx(ctx),
     m_window(window),
-    m_renderer(renderer)
+    m_renderer(renderer),
+    m_sceneManager(&m_scene, &m_resourceManager)
 {}
 
 FDGL::BaseOpenGLContext &FDEngine::BaseEngine::getContext()
@@ -54,4 +55,9 @@ FDCore::TimeManager<> &FDEngine::BaseEngine::getTimeManager()
 const FDCore::TimeManager<> &FDEngine::BaseEngine::getTimeManager() const
 {
     return m_timeMgr;
+}
+
+void FDEngine::BaseEngine::initSceneManager()
+{
+
 }

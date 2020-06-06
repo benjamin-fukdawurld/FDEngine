@@ -16,7 +16,7 @@ LIBS += -L../../thirdparty/assimp/bin
 
 LIBS += -lFDCore -lFDGL -lFD3D
 LIBS += -lFDSerialize -lFDJson -lFD3DJson
-LIBS += -lFDScript -lFDPython -lFD3DPython -lFDCorePython
+LIBS += -lFDScript -lFDPython -lFDCorePython -lFD3DPython
 LIBS += -lFDEngine
 LIBS += -lglad -lpthread -ldl -lstdc++ -lassimp
 

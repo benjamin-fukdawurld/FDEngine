@@ -22,7 +22,7 @@
 
 namespace FDGL
 {
-    class BufferedMesh;
+    class BufferedMeshComponent;
 }
 
 class Renderer final : public FDGL::BaseRenderer
@@ -171,7 +171,7 @@ class Renderer final : public FDGL::BaseRenderer
         void rotateCamera(float elapsedTime);
         void rotateLight(float elapsedTime);
 
-        void renderMesh(FDGL::BufferedMesh *mesh);
+        void renderMesh(FDGL::BufferedMeshComponent *mesh);
 };
 
 
