@@ -1,63 +1,19 @@
-#include "include/FDEngine/BaseEngine.h"
+#include <FDEngine/BaseEngine.h>
 
-FDEngine::BaseEngine::BaseEngine(FDGL::BaseOpenGLContext &ctx, FDGL::BaseOpenGLWindow &window, FDGL::BaseRenderer &renderer) :
-    m_ctx(ctx),
-    m_window(window),
-    m_renderer(renderer),
-    m_sceneManager(&m_scene, &m_resourceManager)
-{}
-
-FDGL::BaseOpenGLContext &FDEngine::BaseEngine::getContext()
+FDEngine::BaseEngine::BaseEngine(StateMachine::AbstractEngineStateMachineController *controller) :
+    FDCore::AbstractApplication(),
+    m_stateMachine(controller)
 {
-    return m_ctx;
 }
 
-const FDGL::BaseOpenGLContext &FDEngine::BaseEngine::getContext() const
+bool FDEngine::BaseEngine::init()
 {
-    return m_ctx;
+    m_stateMachine.start();
+    return true;
 }
 
-FDGL::BaseOpenGLWindow &FDEngine::BaseEngine::getWindow()
+void FDEngine::BaseEngine::quit()
 {
-    return m_window;
+    m_stateMachine.stop();
 }
-
-const FDGL::BaseOpenGLWindow &FDEngine::BaseEngine::getWindow() const
-{
-    return m_window;
-}
-
-FD3D::Scene &FDEngine::BaseEngine::getScene()
-{
-    return m_scene;
-}
-
-const FD3D::Scene &FDEngine::BaseEngine::getScene() const
-{
-    return m_scene;
-}
-
-FDGL::BaseRenderer &FDEngine::BaseEngine::getRenderer()
-{
-    return m_renderer;
-}
-
-const FDGL::BaseRenderer &FDEngine::BaseEngine::getRenderer() const
-{
-    return m_renderer;
-}
-
-FDCore::TimeManager<> &FDEngine::BaseEngine::getTimeManager()
-{
-    return m_timeMgr;
-}
-
-const FDCore::TimeManager<> &FDEngine::BaseEngine::getTimeManager() const
-{
-    return m_timeMgr;
-}
-
-void FDEngine::BaseEngine::initSceneManager()
-{
-
-}
+int FDEngine::BaseEngine::run(int, char **) { return FDCore::AbstractApplication::ExitSuccess; }

@@ -261,7 +261,7 @@
 									"font": "Arial;13;0",
 									"left": 316,
 									"top": 124.5,
-									"width": 95.96630859375,
+									"width": 95,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF0W3D4jFpHD1U="
@@ -1270,7 +1270,7 @@
 									"font": "Arial;13;0",
 									"left": 315,
 									"top": 188.5,
-									"width": 90.208984375,
+									"width": 89,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF0W3W2314Zwhs="
@@ -1464,7 +1464,7 @@
 									"font": "Arial;13;0",
 									"left": 327.5,
 									"top": 244.5,
-									"width": 74.29541015625,
+									"width": 74,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF0W3YltV6W0as="
@@ -1862,7 +1862,7 @@
 									"font": "Arial;13;0",
 									"left": 323,
 									"top": 348.5,
-									"width": 90.18359375,
+									"width": 89,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF0W4X4K1+vsCY="
@@ -3334,9 +3334,9 @@
 														"$ref": "AAAAAAF0X3cX92SrOFU="
 													},
 													"font": "Arial;13;0",
-													"left": 75.97900390625,
+													"left": 71.58642578125,
 													"top": 10,
-													"width": 186.72607421875,
+													"width": 166.31201171875,
 													"height": 13,
 													"text": "LaunchGameSequenceDiagram"
 												},
@@ -3349,7 +3349,7 @@
 													"font": "Arial;13;1",
 													"left": 10,
 													"top": 10,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -4160,9 +4160,9 @@
 														"$ref": "AAAAAAF0ZNEbfGct5yU="
 													},
 													"font": "Arial;13;0",
-													"left": 75.97900390625,
+													"left": 71.58642578125,
 													"top": 13,
-													"width": 183.09521484375,
+													"width": 161.2529296875,
 													"height": 13,
 													"text": "CreateGameSequenceDiagram"
 												},
@@ -4175,7 +4175,7 @@
 													"font": "Arial;13;1",
 													"left": 10,
 													"top": 13,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -5364,9 +5364,9 @@
 														"$ref": "AAAAAAF0ZYy8+2h5mg0="
 													},
 													"font": "Arial;13;0",
-													"left": 75.97900390625,
+													"left": 71.58642578125,
 													"top": 10,
-													"width": 162.865234375,
+													"width": 145.3837890625,
 													"height": 13,
 													"text": "EdiGameSequenceDiagram"
 												},
@@ -5379,7 +5379,7 @@
 													"font": "Arial;13;1",
 													"left": 10,
 													"top": 10,
-													"width": 60.97900390625,
+													"width": 56.58642578125,
 													"height": 13,
 													"text": "interaction"
 												}
@@ -6311,7 +6311,7 @@
 													"top": 311,
 													"width": 75.11181640625,
 													"height": 13,
-													"text": "Initialization"
+													"text": "Init"
 												},
 												{
 													"_type": "LabelView",
@@ -8423,7 +8423,7 @@
 									"_parent": {
 										"$ref": "AAAAAAF0kWrolokEtww="
 									},
-									"name": "Initialization"
+									"name": "Init"
 								},
 								{
 									"_type": "UMLState",
